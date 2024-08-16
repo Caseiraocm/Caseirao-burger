@@ -6,9 +6,12 @@ function gerarPedido() {
 
     let mensagem = `Pedido:\nHambúrguer: ${nome}\nEndereço: ${endereco}\nForma de Pagamento: ${pagamento}\n${taxaEntrega}`;
 
-    let numeroWhatsApp = "5586995033988"; // Seu número corretamente formatado
+    // Número do WhatsApp do Caseirão Burger no formato internacional
+    let numeroWhatsApp = "5586995033988"; // Substitua pelo número correto
 
+    // Gera o link do WhatsApp com a mensagem codificada
     let linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-    console.log("Link gerado:", linkWhatsApp); // Verifique o link gerado
-    window.open(linkWhatsApp, '_blank');
+
+    console.log("Link gerado:", linkWhatsApp); // Verifique o link gerado no console para debug
+    window.open(linkWhatsApp, '_blank'); // Abre o link em uma nova aba
 }
