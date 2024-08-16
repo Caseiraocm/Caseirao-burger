@@ -1,17 +1,53 @@
+let estoque = {
+    carne: 100,
+    frango: 50,
+    bacon: 100,
+    ovo: 100,
+    cebola: 100,
+    queijo: 100,
+    presunto: 100,
+    cheddar: 100
+};
+
+let vendas = [];
+
 function gerarPedido() {
-    let nome = document.getElementById('nome').value;
-    let endereco = document.getElementById('endereco').value;
-    let pagamento = document.getElementById('pagamento').value;
-    let taxaEntrega = "Taxa de entrega: R$ 5,00 dentro da cidade. Zona rural a combinar.";
+    const hamburguer = document.getElementById("hamburguer").value;
+    const adicionais = Array.from(document.querySelectorAll('input[name="adicional"]:checked')).map(el => el.value.split(" - ")[0].toLowerCase()).join(", ");
+    const endereco = document.getElementById("endereco").value;
+    const pagamento = document.getElementById("pagamento").value;
 
-    let mensagem = `Pedido:\nHambúrguer: ${nome}\nEndereço: ${endereco}\nForma de Pagamento: ${pagamento}\n${taxaEntrega}`;
+    // Atualizar Estoque
+    adicionais.split(", ").forEach(adicional => {
+        if (estoque[adicional] !== undefined) {
+            estoque[adicional] -= 1;
+        }
+    });
 
-    // Número do WhatsApp do Caseirão Burger no formato internacional
-    let numeroWhatsApp = "5586995033988"; // Substitua pelo número correto
+    // Registrar a Venda
+    const pedido = {
+        hamburguer: hamburguer,
+        adicionais: adicionais,
+        endereco: endereco,
+        pagamento: pagamento,
+        data: new Date().toLocaleString()
+    };
+    vendas.push(pedido);
 
-    // Gera o link do WhatsApp com a mensagem codificada
-    let linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    // Gerar a mensagem para o WhatsApp
+    const taxaEntrega = "R$ 5,00 (dentro da cidade), valor a combinar (zona rural)";
+    const mensagem = `Pedido: ${hamburguer}\nAdicionais: ${adicionais}\nEndereço: ${endereco}\nForma de Pagamento: ${pagamento}\nTaxa de Entrega: ${taxaEntrega}`;
+    const url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
 
-    console.log("Link gerado:", linkWhatsApp); // Verifique o link gerado no console para debug
-    window.open(linkWhatsApp, '_blank'); // Abre o link em uma nova aba
+    // Exibir Estoque Atualizado (opcional)
+    console.log('Estoque atualizado:', estoque);
+}
+
+function mostrarVendas() {
+    console.table(vendas);
+}
+
+function mostrarEstoque() {
+    console.table(estoque);
 }
