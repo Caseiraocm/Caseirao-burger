@@ -3,187 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caseirão Burger</title>
+    <title>Caseirão Burger - Pedido Online</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
+            margin: 20px;
         }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            font-size: 24px;
+        form {
+            max-width: 400px;
+            margin: auto;
         }
-
-        nav {
-            background-color: #444;
-            padding: 10px;
-            text-align: center;
+        label {
+            display: block;
+            margin-bottom: 5px;
         }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 18px;
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
         }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            color: #333;
-        }
-
-        h1 {
-            font-size: 28px;
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-top: 20px;
-        }
-
-        p, label {
-            color: #555;
-            font-size: 16px;
-        }
-
-        input, select, textarea {
+        button {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
             background-color: #28a745;
             color: white;
-            padding: 15px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
-            width: 100%;
         }
-
         button:hover {
             background-color: #218838;
-        }
-
-        .menu {
-            display: none;
-        }
-
-        .menu.active {
-            display: block;
         }
     </style>
 </head>
 <body>
-    <header>Bem-vindo ao Caseirão Burger</header>
-    <nav>
-        <a href="#inicio" onclick="showMenu('inicio')">Início</a>
-        <a href="#cardapio" onclick="showMenu('cardapio')">Cardápio</a>
-        <a href="#pedido" onclick="showMenu('pedido')">Fazer Pedido</a>
-    </nav>
+    <h1>Faça seu pedido - Caseirão Burger</h1>
+    <form id="pedidoForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-    <div id="inicio" class="container menu active">
-        <h1>Caseirão Burger</h1>
-        <p>Oferecemos os melhores hambúrgueres da cidade, com ingredientes de alta qualidade e um sabor irresistível.</p>
-    </div>
+        <label for="hamburguer">Escolha seu Hambúrguer:</label>
+        <select id="hamburguer" name="hamburguer" required>
+            <option value="Sujinho - R$ 13">Sujinho - R$ 13</option>
+            <option value="Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
+            <option value="Pobr's - R$ 17">Pobr's - R$ 17</option>
+            <option value="Demorô - R$ 20">Demorô - R$ 20</option>
+            <option value="Molecão - R$ 23">Molecão - R$ 23</option>
+            <option value="Caseirão - R$ 25">Caseirão - R$ 25</option>
+            <option value="Podrão - R$ 30">Podrão - R$ 30</option>
+            <option value="Mata fome - R$ 40">Mata fome - R$ 40</option>
+        </select>
 
-    <div id="cardapio" class="container menu">
-        <h1>Nosso Cardápio</h1>
-        <h2>Sujinho - R$ 13</h2>
-        <p>Pão, carne, queijo, presunto, verduras e molho da casa</p>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
 
-        <h2>Pé pra fora - R$ 15</h2>
-        <p>Pão, carne, queijo, presunto, bacon, alface e molho da casa</p>
+        <label for="pagamento">Forma de Pagamento:</label>
+        <select id="pagamento" name="pagamento" required>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão">Cartão</option>
+            <option value="Pix">Pix</option>
+        </select>
 
-        <h2>Pobr's - R$ 17</h2>
-        <p>Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras e molho da casa</p>
+        <label for="troco">Precisa de Troco? (Se sim, para quanto?):</label>
+        <input type="text" id="troco" name="troco">
 
-        <h2>Demorô - R$ 20</h2>
-        <p>Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras e molho da casa</p>
-
-        <h2>Molecão - R$ 23</h2>
-        <p>Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras e molho da casa</p>
-
-        <h2>Caseirão - R$ 25</h2>
-        <p>Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras e molho da casa</p>
-
-        <h2>Podrão - R$ 30</h2>
-        <p>Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras e molho da casa</p>
-
-        <h2>Mata fome - R$ 40</h2>
-        <p>Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa</p>
-    </div>
-
-    <div id="pedido" class="container menu">
-        <h1>Fazer Pedido</h1>
-        <form action="https://wa.me/5586995033988" method="get">
-            <label for="hamburguer">Escolha seu Hambúrguer:</label>
-            <select id="hamburguer" name="text">
-                <option value="Pedido: Sujinho - R$ 13">Sujinho - R$ 13</option>
-                <option value="Pedido: Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
-                <option value="Pedido: Pobr's - R$ 17">Pobr's - R$ 17</option>
-                <option value="Pedido: Demorô - R$ 20">Demorô - R$ 20</option>
-                <option value="Pedido: Molecão - R$ 23">Molecão - R$ 23</option>
-                <option value="Pedido: Caseirão - R$ 25">Caseirão - R$ 25</option>
-                <option value="Pedido: Podrão - R$ 30">Podrão - R$ 30</option>
-                <option value="Pedido: Mata fome - R$ 40">Mata fome - R$ 40</option>
-            </select>
-
-            <label for="adicionais">Adicionais:</label>
-            <textarea id="adicionais" name="text" placeholder="Informe os adicionais desejados"></textarea>
-
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" name="text" placeholder="Digite seu endereço" required>
-
-            <label for="entrega">Forma de Entrega:</label>
-            <select id="entrega" name="text">
-                <option value="Forma de Entrega: Retirar no local">Retirar no local</option>
-                <option value="Forma de Entrega: Entrega em domicílio (Taxa R$ 5,00)">Entrega em domicílio (Taxa R$ 5,00)</option>
-            </select>
-
-            <label for="pagamento">Forma de Pagamento:</label>
-            <select id="pagamento" name="text">
-                <option value="Forma de Pagamento: Dinheiro">Dinheiro</option>
-                <option value="Forma de Pagamento: Cartão">Cartão</option>
-                <option value="Forma de Pagamento: Pix">Pix</option>
-            </select>
-
-            <label for="troco">Precisa de troco?</label>
-            <input type="text" id="troco" name="text" placeholder="Se sim, informe para qual valor">
-
-            <button type="submit">Enviar Pedido via WhatsApp</button>
-        </form>
-    </div>
+        <button type="button" onclick="enviarPedido()">Enviar Pedido</button>
+    </form>
 
     <script>
-        function showMenu(menuId) {
-            const menus = document.querySelectorAll('.menu');
-            menus.forEach(menu => {
-                menu.classList.remove('active');
-            });
-            document.getElementById(menuId).classList.add('active');
+        function enviarPedido() {
+            // Captura os dados do formulário
+            var nome = document.getElementById("nome").value;
+            var hamburguer = document.getElementById("hamburguer").value;
+            var endereco = document.getElementById("endereco").value;
+            var pagamento = document.getElementById("pagamento").value;
+            var troco = document.getElementById("troco").value;
+
+            // Cria a mensagem que será enviada
+            var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
+                           `*Nome:* ${nome}%0A` +
+                           `*Hambúrguer:* ${hamburguer}%0A` +
+                           `*Endereço:* ${endereco}%0A` +
+                           `*Forma de Pagamento:* ${pagamento}%0A` +
+                           `*Troco:* ${troco}%0A`;
+
+            // Codifica a mensagem para o URL do WhatsApp
+            var url = `https://wa.me/5586995033988?text=${mensagem}`;
+
+            // Redireciona para o WhatsApp
+            window.open(url, '_blank');
         }
     </script>
 </body>
