@@ -34,7 +34,7 @@
             margin-bottom: 5px;
             color: #333333;
         }
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -78,10 +78,13 @@
             <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
             <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
             <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
-            <option value="18|Major - R$ 18">Major - R$ 23</option>
+            <option value="18|Zambuque - R$ 18">Zambuque - R$ 18</option>
         </select>
 
         <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
+
+        <label for="observacao">Observações (caso queira mudar algo no pedido):</label>
+        <textarea id="observacao" name="observacao" rows="3" placeholder="Exemplo: Sem cebola, adicionar mais queijo"></textarea>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
         <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco()">
@@ -143,8 +146,8 @@
                 case "Mata fome - R$ 40":
                     ingredientes = "Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa.";
                     break;
-                case "Major - R$ 23":
-                    ingredientes = "Pão, carne, molho barbecue, Filé de Frango, calabresa, queijo, verduras e molho da casa.";
+                case "Zambuque - R$ 18":
+                    ingredientes = "Pão, carne, molho barbecue, calabresa, queijo, verduras e molho da casa.";
                     break;
                 default:
                     ingredientes = "Selecione um hambúrguer para ver os ingredientes.";
@@ -167,6 +170,7 @@
             var nome = document.getElementById("nome").value;
             var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
             var ingredientes = document.getElementById("ingredientes").textContent;
+            var observacao = document.getElementById("observacao").value;
             var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
             var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
             var numero = document.getElementById("numero").value;
@@ -179,6 +183,7 @@
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
                            `*Ingredientes:* ${ingredientes}%0A` +
+                           `*Observações:* ${observacao}%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}, Nº ${numero}%0A` +
                            `*Ponto de Referência:* ${referencia}%0A` +
@@ -186,7 +191,7 @@
                            `*Troco:* ${troco}%0A` +
                            `*Preço Total:* ${precoFinal}%0A`;
 
-            var url = `https://wa.me/5586995033988?text=${mensagem}`;
+            var url = `https://wa.me/55{SEU_NUMERO_DE_TELEFONE}?text=${mensagem}`;
             window.open(url, '_blank');
         }
     </script>
