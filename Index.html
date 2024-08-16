@@ -55,6 +55,11 @@
         button:hover {
             background-color: #218838;
         }
+        #precoFinal {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -64,24 +69,24 @@
         <input type="text" id="nome" name="nome" required>
 
         <label for="hamburguer">Escolha seu Hambúrguer:</label>
-        <select id="hamburguer" name="hamburguer" required onchange="atualizarIngredientes()">
-            <option value="Sujinho - R$ 13">Sujinho - R$ 13</option>
-            <option value="Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
-            <option value="Pobr's - R$ 17">Pobr's - R$ 17</option>
-            <option value="Demorô - R$ 20">Demorô - R$ 20</option>
-            <option value="Molecão - R$ 23">Molecão - R$ 23</option>
-            <option value="Caseirão - R$ 25">Caseirão - R$ 25</option>
-            <option value="Podrão - R$ 30">Podrão - R$ 30</option>
-            <option value="Mata fome - R$ 40">Mata fome - R$ 40</option>
-            <option value="Zambuque - R$ 18">Zambuque - R$ 18</option>
+        <select id="hamburguer" name="hamburguer" required onchange="atualizarIngredientes(); calcularPreco();">
+            <option value="13|Sujinho - R$ 13">Sujinho - R$ 13</option>
+            <option value="15|Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
+            <option value="17|Pobr's - R$ 17">Pobr's - R$ 17</option>
+            <option value="20|Demorô - R$ 20">Demorô - R$ 20</option>
+            <option value="23|Molecão - R$ 23">Molecão - R$ 23</option>
+            <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
+            <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
+            <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
+            <option value="18|Zambuque - R$ 18">Zambuque - R$ 18</option>
         </select>
 
         <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
-        <select id="tipoEntrega" name="tipoEntrega" required>
-            <option value="Entrega">Entrega - R$ 5,00</option>
-            <option value="Retirada">Retirada</option>
+        <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco()">
+            <option value="5|Entrega">Entrega - R$ 5,00</option>
+            <option value="0|Retirada">Retirada</option>
         </select>
 
         <label for="endereco">Endereço:</label>
@@ -97,12 +102,14 @@
         <label for="troco">Precisa de Troco? (Se sim, para quanto?):</label>
         <input type="text" id="troco" name="troco">
 
+        <div id="precoFinal">Preço Total: R$ 0,00</div>
+
         <button type="button" onclick="enviarPedido()">Enviar Pedido</button>
     </form>
 
     <script>
         function atualizarIngredientes() {
-            var hamburguer = document.getElementById("hamburguer").value;
+            var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
             var ingredientes = "";
 
             switch(hamburguer) {
@@ -141,14 +148,24 @@
             document.getElementById("ingredientes").textContent = ingredientes;
         }
 
+        function calcularPreco() {
+            var hamburguerValor = parseFloat(document.getElementById("hamburguer").value.split('|')[0]);
+            var entregaValor = parseFloat(document.getElementById("tipoEntrega").value.split('|')[0]);
+
+            var precoFinal = hamburguerValor + entregaValor;
+
+            document.getElementById("precoFinal").textContent = "Preço Total: R$ " + precoFinal.toFixed(2);
+        }
+
         function enviarPedido() {
             var nome = document.getElementById("nome").value;
-            var hamburguer = document.getElementById("hamburguer").value;
+            var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
             var ingredientes = document.getElementById("ingredientes").textContent;
-            var tipoEntrega = document.getElementById("tipoEntrega").value;
+            var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
             var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
             var pagamento = document.getElementById("pagamento").value;
             var troco = document.getElementById("troco").value;
+            var precoFinal = document.getElementById("precoFinal").textContent;
 
             var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
                            `*Nome:* ${nome}%0A` +
@@ -157,7 +174,8 @@
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}%0A` +
                            `*Forma de Pagamento:* ${pagamento}%0A` +
-                           `*Troco:* ${troco}%0A`;
+                           `*Troco:* ${troco}%0A` +
+                           `*${precoFinal}*`;
 
             var url = `https://wa.me/5586995033988?text=${mensagem}`;
             window.open(url, '_blank');
