@@ -1,97 +1,44 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fafafa;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #f8f8f8;
 }
 
 h1 {
+    color: #333;
     text-align: center;
-    color: #ff6347; /* Cor vibrante para o título */
-    font-size: 32px;
-    margin-bottom: 20px;
 }
 
 form {
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
-}
-
-label {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
-    display: block;
-}
-
-select, input[type="text"], button {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
     border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-select, input[type="text"] {
-    background-color: #f9f9f9;
+h2 {
+    margin-bottom: 10px;
+    color: #444;
 }
 
-select:focus, input[type="text"]:focus {
-    background-color: #f0f0f0;
-    border-color: #ff6347; /* Destacar com a cor principal ao focar */
-    outline: none;
+label, select, input {
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
 }
 
 button {
-    background-color: #ff6347; /* Cor vibrante para o botão */
+    background-color: #28a745;
     color: white;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 10px;
     border: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #e55347;
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-.burger-name {
-    color: #333;
-    font-weight: bold;
-}
-
-.burger-desc {
-    color: #888;
-}
-
-optgroup {
-    font-weight: bold;
-    color: #555; /* Cor para o grupo */
-    font-size: 16px;
-    padding: 5px 0;
-}
-
-option {
-    color: #333;
-    padding: 10px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
-}
-
-option:hover {
-    background-color: #ffebcd; /* Cor de destaque ao passar o mouse */
+    background-color: #218838;
 }
