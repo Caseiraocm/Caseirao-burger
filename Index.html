@@ -55,6 +55,13 @@
         button:hover {
             background-color: #218838;
         }
+        .hamburguer-section {
+            margin-bottom: 20px;
+        }
+        .hamburguer-section .remove-button {
+            background-color: #dc3545;
+            margin-top: -10px;
+        }
         #precoFinal {
             font-weight: bold;
             text-align: center;
@@ -68,26 +75,35 @@
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
 
-        <label for="hamburguer">Escolha seu Hambúrguer:</label>
-        <select id="hamburguer" name="hamburguer" required onchange="atualizarIngredientes(); calcularPreco();">
-            <option value="13|Sujinho - R$ 13">Sujinho - R$ 13</option>
-            <option value="15|Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
-            <option value="17|Pobr's - R$ 17">Pobr's - R$ 17</option>
-            <option value="20|Demorô - R$ 20">Demorô - R$ 20</option>
-            <option value="23|Molecão - R$ 23">Molecão - R$ 23</option>
-            <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
-            <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
-            <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
-            <option value="23|Major - R$ 23">Major - R$ 23</option>
-        </select>
+        <div id="hamburgueresContainer">
+            <!-- Primeira seção de hambúrguer -->
+            <div class="hamburguer-section">
+                <label for="hamburguer">Escolha seu Hambúrguer:</label>
+                <select class="hamburguer" name="hamburguer" required onchange="atualizarIngredientes(this); calcularPreco();">
+                    <option value="13|Sujinho - R$ 13">Sujinho - R$ 13</option>
+                    <option value="15|Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
+                    <option value="17|Pobr's - R$ 17">Pobr's - R$ 17</option>
+                    <option value="20|Demorô - R$ 20">Demorô - R$ 20</option>
+                    <option value="23|Molecão - R$ 23">Molecão - R$ 23</option>
+                    <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
+                    <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
+                    <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
+                    <option value="23|Major - R$ 23">Major - R$ 23</option>
+                </select>
 
-        <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
+                <p class="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
 
-        <label for="quantidade">Quantidade:</label>
-        <input type="number" id="quantidade" name="quantidade" min="1" value="1" required onchange="calcularPreco();">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" class="quantidade" name="quantidade" min="1" value="1" required onchange="calcularPreco();">
 
-        <label for="observacao">Observações (caso queira mudar algo no pedido):</label>
-        <textarea id="observacao" name="observacao" rows="3" placeholder="Exemplo: Sem cebola, adicionar mais queijo"></textarea>
+                <label for="observacao">Observações (caso queira mudar algo no pedido):</label>
+                <textarea class="observacao" name="observacao" rows="3" placeholder="Exemplo: Sem cebola, adicionar mais queijo"></textarea>
+
+                <button type="button" class="remove-button" onclick="removerHamburguer(this)">Remover Hambúrguer</button>
+            </div>
+        </div>
+
+        <button type="button" onclick="adicionarHamburguer()">Adicionar outro Hambúrguer</button>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
         <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco(); verificarEndereco();">
@@ -120,8 +136,8 @@
     </form>
 
     <script>
-        function atualizarIngredientes() {
-            var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
+        function atualizarIngredientes(selectElement) {
+            var hamburguer = selectElement.value.split('|')[1];
             var ingredientes = "";
 
             switch(hamburguer) {
@@ -157,25 +173,68 @@
                     break;
             }
 
-            document.getElementById("ingredientes").textContent = ingredientes;
+            selectElement.parentNode.querySelector(".ingredientes").textContent = ingredientes;
         }
 
         function calcularPreco() {
-            var hamburguerValor = parseFloat(document.getElementById("hamburguer").value.split('|')[0]);
+            var hamburgueres = document.querySelectorAll(".hamburguer-section");
+            var total = 0;
+
+            hamburgueres.forEach(function(section) {
+                var hamburguerValor = parseFloat(section.querySelector(".hamburguer").value.split('|')[0]);
+                var quantidade = parseInt(section.querySelector(".quantidade").value);
+                total += hamburguerValor * quantidade;
+            });
+
             var entregaValor = parseFloat(document.getElementById("tipoEntrega").value.split('|')[0]);
-            var quantidade = parseInt(document.getElementById("quantidade").value);
 
-            var precoFinal = (hamburguerValor * quantidade) + entregaValor;
+            total += entregaValor;
 
-            document.getElementById("precoFinal").textContent = "Preço Total: R$ " + precoFinal.toFixed(2);
+            document.getElementById("precoFinal").textContent = "Preço Total: R$ " + total.toFixed(2);
+        }
+
+        function adicionarHamburguer() {
+            var container = document.getElementById("hamburgueresContainer");
+            var novaSecao = document.createElement("div");
+            novaSecao.classList.add("hamburguer-section");
+
+            novaSecao.innerHTML = `
+                <label for="hamburguer">Escolha seu Hambúrguer:</label>
+                <select class="hamburguer" name="hamburguer" required onchange="atualizarIngredientes(this); calcularPreco();">
+                    <option value="13|Sujinho - R$ 13">Sujinho - R$ 13</option>
+                    <option value="15|Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
+                    <option value="17|Pobr's - R$ 17">Pobr's - R$ 17</option>
+                    <option value="20|Demorô - R$ 20">Demorô - R$ 20</option>
+                    <option value="23|Molecão - R$ 23">Molecão - R$ 23</option>
+                    <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
+                    <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
+                    <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
+                    <option value="23|Major - R$ 23">Major - R$ 23</option>
+                </select>
+
+                <p class="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
+
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" class="quantidade" name="quantidade" min="1" value="1" required onchange="calcularPreco();">
+
+                <label for="observacao">Observações (caso queira mudar algo no pedido):</label>
+                <textarea class="observacao" name="observacao" rows="3" placeholder="Exemplo: Sem cebola, adicionar mais queijo"></textarea>
+
+                <button type="button" class="remove-button" onclick="removerHamburguer(this)">Remover Hambúrguer</button>
+            `;
+
+            container.appendChild(novaSecao);
+        }
+
+        function removerHamburguer(button) {
+            var section = button.parentNode;
+            section.parentNode.removeChild(section);
+            calcularPreco(); // Recalcular o preço total após a remoção
         }
 
         function enviarPedido() {
             var nome = document.getElementById("nome").value || "Não informado";
-            var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
-            var quantidade = document.getElementById("quantidade").value;
-            var ingredientes = document.getElementById("ingredientes").textContent;
-            var observacao = document.getElementById("observacao").value || "Nenhuma";
+            var hamburgueres = document.querySelectorAll(".hamburguer-section");
             var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
             var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
             var numero = document.getElementById("numero").value || "S/N";
@@ -186,20 +245,29 @@
 
             var mensagem = `*Pedido Caseirão Burger*\n` +
                            `--------------------------------------------\n` +
-                           `*Nome:* ${nome}\n` +
-                           `*Hambúrguer:* ${hamburguer}\n` +
-                           `*Quantidade:* ${quantidade}\n` +
-                           `*Ingredientes:* ${ingredientes}\n` +
-                           `*Observações:* ${observacao}\n` +
-                           `--------------------------------------------\n` +
-                           `*Tipo de Entrega:* ${tipoEntrega}\n` +
-                           `*Endereço:* ${endereco}, Nº ${numero}\n` +
-                           `*Ponto de Referência:* ${referencia}\n` +
-                           `--------------------------------------------\n` +
-                           `*Forma de Pagamento:* ${pagamento}\n` +
-                           `*Troco:* ${troco}\n` +
-                           `--------------------------------------------\n` +
-                           `*Preço Total:* ${precoFinal}`;
+                           `*Nome:* ${nome}\n`;
+
+            hamburgueres.forEach(function(section, index) {
+                var hamburguer = section.querySelector(".hamburguer").value.split('|')[1];
+                var quantidade = section.querySelector(".quantidade").value;
+                var ingredientes = section.querySelector(".ingredientes").textContent;
+                var observacao = section.querySelector(".observacao").value || "Nenhuma";
+
+                mensagem += `*Hambúrguer ${index + 1}:* ${hamburguer}\n` +
+                            `*Quantidade:* ${quantidade}\n` +
+                            `*Ingredientes:* ${ingredientes}\n` +
+                            `*Observações:* ${observacao}\n` +
+                            `--------------------------------------------\n`;
+            });
+
+            mensagem += `*Tipo de Entrega:* ${tipoEntrega}\n` +
+                        `*Endereço:* ${endereco}, Nº ${numero}\n` +
+                        `*Ponto de Referência:* ${referencia}\n` +
+                        `--------------------------------------------\n` +
+                        `*Forma de Pagamento:* ${pagamento}\n` +
+                        `*Troco:* ${troco}\n` +
+                        `--------------------------------------------\n` +
+                        `*Preço Total:* ${precoFinal}`;
 
             var url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
