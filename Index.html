@@ -78,28 +78,31 @@
             <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
             <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
             <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
-            <option value="23|Major - R$ 23">Major - R$23</option>
+            <option value="23|Major - R$ 23">Major - R$ 23</option>
         </select>
 
         <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" min="1" value="1" required onchange="calcularPreco();">
 
         <label for="observacao">Observações (caso queira mudar algo no pedido):</label>
         <textarea id="observacao" name="observacao" rows="3" placeholder="Exemplo: Sem cebola, adicionar mais queijo"></textarea>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
-        <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco()">
+        <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco(); verificarEndereco();">
             <option value="5|Entrega">Entrega - R$ 5,00</option>
             <option value="0|Retirada">Retirada</option>
         </select>
 
         <label for="endereco">Endereço:</label>
-        <input type="text" id="endereco" name="endereco">
+        <input type="text" id="endereco" name="endereco" placeholder="Rua, Bairro, Cidade">
 
         <label for="numero">Número da Casa:</label>
-        <input type="text" id="numero" name="numero">
+        <input type="text" id="numero" name="numero" placeholder="Ex: 123">
 
         <label for="referencia">Ponto de Referência:</label>
-        <input type="text" id="referencia" name="referencia">
+        <input type="text" id="referencia" name="referencia" placeholder="Ex: Próximo ao mercado X">
 
         <label for="pagamento">Forma de Pagamento:</label>
         <select id="pagamento" name="pagamento" required>
@@ -109,7 +112,7 @@
         </select>
 
         <label for="troco">Precisa de Troco? (Se sim, para quanto?):</label>
-        <input type="text" id="troco" name="troco">
+        <input type="text" id="troco" name="troco" placeholder="Ex: Troco para R$ 50,00">
 
         <div id="precoFinal">Preço Total: R$ 0,00</div>
 
@@ -147,7 +150,7 @@
                     ingredientes = "Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa.";
                     break;
                 case "Major - R$ 23":
-                    ingredientes = "Pão, carne, filé de frango,molho barbecue, calabresa, queijo, verduras e molho da casa.";
+                    ingredientes = "Pão, carne, filé de frango, molho barbecue, calabresa, queijo, verduras e molho da casa.";
                     break;
                 default:
                     ingredientes = "Selecione um hambúrguer para ver os ingredientes.";
@@ -160,8 +163,9 @@
         function calcularPreco() {
             var hamburguerValor = parseFloat(document.getElementById("hamburguer").value.split('|')[0]);
             var entregaValor = parseFloat(document.getElementById("tipoEntrega").value.split('|')[0]);
+            var quantidade = parseInt(document.getElementById("quantidade").value);
 
-            var precoFinal = hamburguerValor + entregaValor;
+            var precoFinal = (hamburguerValor * quantidade) + entregaValor;
 
             document.getElementById("precoFinal").textContent = "Preço Total: R$ " + precoFinal.toFixed(2);
         }
@@ -169,6 +173,7 @@
         function enviarPedido() {
             var nome = document.getElementById("nome").value;
             var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
+            var quantidade = document.getElementById("quantidade").value;
             var ingredientes = document.getElementById("ingredientes").textContent;
             var observacao = document.getElementById("observacao").value;
             var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
@@ -182,6 +187,7 @@
             var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
+                           `*Quantidade:* ${quantidade}%0A` +
                            `*Ingredientes:* ${ingredientes}%0A` +
                            `*Observações:* ${observacao}%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
@@ -191,9 +197,26 @@
                            `*Troco:* ${troco}%0A` +
                            `*Preço Total:* ${precoFinal}%0A`;
 
-            var url = `https://wa.me/5586995033988?text=${mensagem}`;
+            var url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
         }
+
+        function verificarEndereco() {
+            var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
+            var enderecoField = document.getElementById("endereco");
+            var numeroField = document.getElementById("numero");
+
+            if (tipoEntrega === "Entrega") {
+                enderecoField.setAttribute("required", "required");
+                numeroField.setAttribute("required", "required");
+            } else {
+                enderecoField.removeAttribute("required");
+                numeroField.removeAttribute("required");
+            }
+        }
+
+        // Chamada inicial para verificar a necessidade de endereço
+        verificarEndereco();
     </script>
 </body>
 </html>
