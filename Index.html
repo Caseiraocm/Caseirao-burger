@@ -8,19 +8,27 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f8f9fa;
         }
         form {
             max-width: 400px;
             margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
             margin-bottom: 5px;
+            color: #333333;
         }
         input, select {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
             box-sizing: border-box;
         }
         button {
@@ -29,7 +37,9 @@
             background-color: #28a745;
             color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-weight: bold;
         }
         button:hover {
             background-color: #218838;
@@ -52,10 +62,17 @@
             <option value="Caseirão - R$ 25">Caseirão - R$ 25</option>
             <option value="Podrão - R$ 30">Podrão - R$ 30</option>
             <option value="Mata fome - R$ 40">Mata fome - R$ 40</option>
+            <option value="Zambuque - R$ 18">Zambuque - R$ 18</option>
+        </select>
+
+        <label for="tipoEntrega">Tipo de Entrega:</label>
+        <select id="tipoEntrega" name="tipoEntrega" required>
+            <option value="Entrega">Entrega - R$ 5,00</option>
+            <option value="Retirada">Retirada</option>
         </select>
 
         <label for="endereco">Endereço:</label>
-        <input type="text" id="endereco" name="endereco" required>
+        <input type="text" id="endereco" name="endereco">
 
         <label for="pagamento">Forma de Pagamento:</label>
         <select id="pagamento" name="pagamento" required>
@@ -72,25 +89,22 @@
 
     <script>
         function enviarPedido() {
-            // Captura os dados do formulário
             var nome = document.getElementById("nome").value;
             var hamburguer = document.getElementById("hamburguer").value;
-            var endereco = document.getElementById("endereco").value;
+            var tipoEntrega = document.getElementById("tipoEntrega").value;
+            var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
             var pagamento = document.getElementById("pagamento").value;
             var troco = document.getElementById("troco").value;
 
-            // Cria a mensagem que será enviada
             var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
+                           `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}%0A` +
                            `*Forma de Pagamento:* ${pagamento}%0A` +
                            `*Troco:* ${troco}%0A`;
 
-            // Codifica a mensagem para o URL do WhatsApp
             var url = `https://wa.me/5586995033988?text=${mensagem}`;
-
-            // Redireciona para o WhatsApp
             window.open(url, '_blank');
         }
     </script>
