@@ -34,7 +34,7 @@
             margin-bottom: 5px;
             color: #333333;
         }
-        input, select {
+        input, select, checkbox {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -82,6 +82,22 @@
         </select>
 
         <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
+
+        <label for="acrescimos">Escolha seus Acréscimos:</label>
+        <input type="checkbox" name="acrescimos" value="2|Ovo"> Ovo - R$ 2<br>
+        <input type="checkbox" name="acrescimos" value="7|Carne"> Carne - R$ 7<br>
+        <input type="checkbox" name="acrescimos" value="3|Cebola caramelizada"> Cebola caramelizada - R$ 3<br>
+        <input type="checkbox" name="acrescimos" value="3|Queijo"> Queijo - R$ 3<br>
+        <input type="checkbox" name="acrescimos" value="3|Presunto"> Presunto - R$ 3<br>
+        <input type="checkbox" name="acrescimos" value="4|Cheddar"> Cheddar - R$ 4<br>
+        <input type="checkbox" name="acrescimos" value="3|Calabresa"> Calabresa - R$ 3<br>
+
+        <label for="refrigerante">Escolha seu Refrigerante:</label>
+        <select id="refrigerante" name="refrigerante" onchange="calcularPreco()">
+            <option value="0|Nenhum">Nenhum</option>
+            <option value="7|Pepsi ou Antarctica 1l">Pepsi ou Antarctica 1l - R$ 7</option>
+            <option value="5|Latinha">Latinha - R$ 5</option>
+        </select>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
         <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco()">
@@ -157,8 +173,17 @@
         function calcularPreco() {
             var hamburguerValor = parseFloat(document.getElementById("hamburguer").value.split('|')[0]);
             var entregaValor = parseFloat(document.getElementById("tipoEntrega").value.split('|')[0]);
+            var refrigeranteValor = parseFloat(document.getElementById("refrigerante").value.split('|')[0var refrigeranteValor = parseFloat(document.getElementById("refrigerante").value.split('|')[0]);
+            var acrescimosValor = 0;
 
-            var precoFinal = hamburguerValor + entregaValor;
+            var acrescimos = document.getElementsByName("acrescimos");
+            for (var i = 0; i < acrescimos.length; i++) {
+                if (acrescimos[i].checked) {
+                    acrescimosValor += parseFloat(acrescimos[i].value.split('|')[0]);
+                }
+            }
+
+            var precoFinal = hamburguerValor + entregaValor + refrigeranteValor + acrescimosValor;
 
             document.getElementById("precoFinal").textContent = "Preço Total: R$ " + precoFinal.toFixed(2);
         }
@@ -173,12 +198,23 @@
             var referencia = document.getElementById("referencia").value;
             var pagamento = document.getElementById("pagamento").value;
             var troco = document.getElementById("troco").value;
+            var refrigerante = document.getElementById("refrigerante").value.split('|')[1];
             var precoFinal = document.getElementById("precoFinal").textContent;
+
+            var acrescimosSelecionados = [];
+            var acrescimos = document.getElementsByName("acrescimos");
+            for (var i = 0; i < acrescimos.length; i++) {
+                if (acrescimos[i].checked) {
+                    acrescimosSelecionados.push(acrescimos[i].value.split('|')[1]);
+                }
+            }
 
             var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
                            `*Ingredientes:* ${ingredientes}%0A` +
+                           `*Acréscimos:* ${acrescimosSelecionados.join(', ')}%0A` +
+                           `*Refrigerante:* ${refrigerante}%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}, Nº ${numero}%0A` +
                            `*Ponto de Referência:* ${referencia}%0A` +
@@ -186,7 +222,7 @@
                            `*Troco:* ${troco}%0A` +
                            `*Preço Total:* ${precoFinal}%0A`;
 
-            var url = `https://wa.me/5586995033988?text=${mensagem}`;
+            var url = `https://wa.me/55{SEU_NUMERO_DE_TELEFONE}?text=${mensagem}`;
             window.open(url, '_blank');
         }
     </script>
