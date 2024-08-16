@@ -1,0 +1,14 @@
+function gerarPedido() {
+    let nome = document.getElementById('nome').value;
+    let endereco = document.getElementById('endereco').value;
+    let pagamento = document.getElementById('pagamento').value;
+    let taxaEntrega = "Taxa de entrega: R$ 5,00 dentro da cidade. Zona rural a combinar.";
+
+    let mensagem = `Pedido:\nHambúrguer: ${nome}\nEndereço: ${endereco}\nForma de Pagamento: ${pagamento}\n${taxaEntrega}`;
+
+    let numeroWhatsApp = "5586995033988"; // Seu número corretamente formatado
+
+    let linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    console.log("Link gerado:", linkWhatsApp); // Verifique o link gerado
+    window.open(linkWhatsApp, '_blank');
+}
