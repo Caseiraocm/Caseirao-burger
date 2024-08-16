@@ -1,71 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedido - Caseirão Burger</title>
+    <title>Caseirão Burger - Faça seu Pedido</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Faça seu Pedido</h1>
+    <h1>Caseirão Burger</h1>
     <form id="pedidoForm">
-        <label for="nome">Escolha seu Hambúrguer:</label>
-        <select id="nome">
-            <optgroup label="Hambúrgueres Clássicos">
-                <option value="Sujinho - R$ 13">
-                    <span class="burger-name">Sujinho - R$ 13</span> 
-                    <span class="burger-desc">| Pão, carne, queijo, presunto, verduras e molho da casa</span>
-                </option>
-                <option value="Pé pra Fora - R$ 15">
-                    <span class="burger-name">Pé pra Fora - R$ 15</span> 
-                    <span class="burger-desc">| Pão, carne, queijo, presunto, bacon, alface e molho da casa</span>
-                </option>
-                <option value="Pobr's - R$ 17">
-                    <span class="burger-name">Pobr's - R$ 17</span> 
-                    <span class="burger-desc">| Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras e molho da casa</span>
-                </option>
-            </optgroup>
-            <optgroup label="Hambúrgueres Especiais">
-                <option value="Demorô - R$ 20">
-                    <span class="burger-name">Demorô - R$ 20</span> 
-                    <span class="burger-desc">| Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras e molho da casa</span>
-                </option>
-                <option value="Molecão - R$ 23">
-                    <span class="burger-name">Molecão - R$ 23</span> 
-                    <span class="burger-desc">| Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras e molho da casa</span>
-                </option>
-                <option value="Caseirão - R$ 25">
-                    <span class="burger-name">Caseirão - R$ 25</span> 
-                    <span class="burger-desc">| Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras e molho da casa</span>
-                </option>
-                <option value="Major - R$ 23">
-                    <span class="burger-name">Major - R$ 23</span> 
-                    <span class="burger-desc">| Pão, carne, filé de frango, molho barbecue, calabresa, molho da casa e verduras</span>
-                </option>
-            </optgroup>
-            <optgroup label="Hambúrgueres Gigantes">
-                <option value="Podrão - R$ 30">
-                    <span class="burger-name">Podrão - R$ 30</span> 
-                    <span class="burger-desc">| Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras e molho da casa</span>
-                </option>
-                <option value="Mata Fome - R$ 40">
-                    <span class="burger-name">Mata Fome - R$ 40</span> 
-                    <span class="burger-desc">| Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa</span>
-                </option>
-            </optgroup>
+        <h2>Escolha seu Hambúrguer:</h2>
+        <select id="hamburguer">
+            <option value="Sujinho - R$ 13">Sujinho - Pão, carne, queijo, presunto, verduras e molho da casa - R$ 13</option>
+            <option value="Pé pra fora - R$ 15">Pé pra fora - Pão, carne, queijo, presunto, bacon, alface e molho da casa - R$ 15</option>
+            <option value="Pobr's - R$ 17">Pobr's - Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras e molho da casa - R$ 17</option>
+            <option value="Demorô - R$ 20">Demorô - Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras e molho da casa - R$ 20</option>
+            <option value="Molecão - R$ 23">Molecão - Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras e molho da casa - R$ 23</option>
+            <option value="Caseirão - R$ 25">Caseirão - Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras e molho da casa - R$ 25</option>
+            <option value="Podrão - R$ 30">Podrão - Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras e molho da casa - R$ 30</option>
+            <option value="Mata fome - R$ 40">Mata fome - Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa - R$ 40</option>
         </select>
 
-        <label for="endereco">Endereço de Entrega:</label>
-        <input type="text" id="endereco" placeholder="Digite seu endereço">
+        <h2>Adicionais:</h2>
+        <label><input type="checkbox" name="adicional" value="Carne - R$ 8"> Carne - R$ 8</label><br>
+        <label><input type="checkbox" name="adicional" value="Frango desfiado - R$ 4"> Frango desfiado - R$ 4</label><br>
+        <label><input type="checkbox" name="adicional" value="Bacon - R$ 3"> Bacon - R$ 3</label><br>
+        <label><input type="checkbox" name="adicional" value="Ovo - R$ 2"> Ovo - R$ 2</label><br>
+        <label><input type="checkbox" name="adicional" value="Cebola caramelizada - R$ 3"> Cebola caramelizada - R$ 3</label><br>
+        <label><input type="checkbox" name="adicional" value="Queijo - R$ 3"> Queijo - R$ 3</label><br>
+        <label><input type="checkbox" name="adicional" value="Presunto - R$ 3"> Presunto - R$ 3</label><br>
+        <label><input type="checkbox" name="adicional" value="Cheddar - R$ 4"> Cheddar - R$ 4</label><br>
 
-        <label for="pagamento">Forma de Pagamento:</label>
+        <h2>Endereço:</h2>
+        <input type="text" id="endereco" placeholder="Digite seu endereço" required>
+
+        <h2>Forma de Pagamento:</h2>
         <select id="pagamento">
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão">Cartão</option>
             <option value="Pix">Pix</option>
         </select>
 
-        <button type="button" onclick="gerarPedido()">Enviar Pedido</button>
+        <button type="button" onclick="gerarPedido()">Enviar Pedido via WhatsApp</button>
     </form>
 
     <script src="script.js"></script>
