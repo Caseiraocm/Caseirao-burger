@@ -34,7 +34,7 @@
             margin-bottom: 5px;
             color: #333333;
         }
-        input, select, checkbox {
+        input, select {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -78,26 +78,10 @@
             <option value="25|Caseirão - R$ 25">Caseirão - R$ 25</option>
             <option value="30|Podrão - R$ 30">Podrão - R$ 30</option>
             <option value="40|Mata fome - R$ 40">Mata fome - R$ 40</option>
-            <option value="18|Zambuque - R$ 18">Zambuque - R$ 18</option>
+            <option value="18|Major - R$ 18">Major - R$ 23</option>
         </select>
 
         <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
-
-        <label for="acrescimos">Escolha seus Acréscimos:</label>
-        <input type="checkbox" name="acrescimos" value="2|Ovo"> Ovo - R$ 2<br>
-        <input type="checkbox" name="acrescimos" value="7|Carne"> Carne - R$ 7<br>
-        <input type="checkbox" name="acrescimos" value="3|Cebola caramelizada"> Cebola caramelizada - R$ 3<br>
-        <input type="checkbox" name="acrescimos" value="3|Queijo"> Queijo - R$ 3<br>
-        <input type="checkbox" name="acrescimos" value="3|Presunto"> Presunto - R$ 3<br>
-        <input type="checkbox" name="acrescimos" value="4|Cheddar"> Cheddar - R$ 4<br>
-        <input type="checkbox" name="acrescimos" value="3|Calabresa"> Calabresa - R$ 3<br>
-
-        <label for="refrigerante">Escolha seu Refrigerante:</label>
-        <select id="refrigerante" name="refrigerante" onchange="calcularPreco()">
-            <option value="0|Nenhum">Nenhum</option>
-            <option value="7|Pepsi ou Antarctica 1l">Pepsi ou Antarctica 1l - R$ 7</option>
-            <option value="5|Latinha">Latinha - R$ 5</option>
-        </select>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
         <select id="tipoEntrega" name="tipoEntrega" required onchange="calcularPreco()">
@@ -159,8 +143,8 @@
                 case "Mata fome - R$ 40":
                     ingredientes = "Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa.";
                     break;
-                case "Zambuque - R$ 18":
-                    ingredientes = "Pão, carne, molho barbecue, calabresa, queijo, verduras e molho da casa.";
+                case "Major - R$ 23":
+                    ingredientes = "Pão, carne, molho barbecue, Filé de Frango, calabresa, queijo, verduras e molho da casa.";
                     break;
                 default:
                     ingredientes = "Selecione um hambúrguer para ver os ingredientes.";
@@ -173,17 +157,8 @@
         function calcularPreco() {
             var hamburguerValor = parseFloat(document.getElementById("hamburguer").value.split('|')[0]);
             var entregaValor = parseFloat(document.getElementById("tipoEntrega").value.split('|')[0]);
-            var refrigeranteValor = parseFloat(document.getElementById("refrigerante").value.split('|')[0var refrigeranteValor = parseFloat(document.getElementById("refrigerante").value.split('|')[0]);
-            var acrescimosValor = 0;
 
-            var acrescimos = document.getElementsByName("acrescimos");
-            for (var i = 0; i < acrescimos.length; i++) {
-                if (acrescimos[i].checked) {
-                    acrescimosValor += parseFloat(acrescimos[i].value.split('|')[0]);
-                }
-            }
-
-            var precoFinal = hamburguerValor + entregaValor + refrigeranteValor + acrescimosValor;
+            var precoFinal = hamburguerValor + entregaValor;
 
             document.getElementById("precoFinal").textContent = "Preço Total: R$ " + precoFinal.toFixed(2);
         }
@@ -198,23 +173,12 @@
             var referencia = document.getElementById("referencia").value;
             var pagamento = document.getElementById("pagamento").value;
             var troco = document.getElementById("troco").value;
-            var refrigerante = document.getElementById("refrigerante").value.split('|')[1];
             var precoFinal = document.getElementById("precoFinal").textContent;
-
-            var acrescimosSelecionados = [];
-            var acrescimos = document.getElementsByName("acrescimos");
-            for (var i = 0; i < acrescimos.length; i++) {
-                if (acrescimos[i].checked) {
-                    acrescimosSelecionados.push(acrescimos[i].value.split('|')[1]);
-                }
-            }
 
             var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
                            `*Ingredientes:* ${ingredientes}%0A` +
-                           `*Acréscimos:* ${acrescimosSelecionados.join(', ')}%0A` +
-                           `*Refrigerante:* ${refrigerante}%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}, Nº ${numero}%0A` +
                            `*Ponto de Referência:* ${referencia}%0A` +
