@@ -175,26 +175,30 @@
             var hamburguer = document.getElementById("hamburguer").value.split('|')[1];
             var quantidade = document.getElementById("quantidade").value;
             var ingredientes = document.getElementById("ingredientes").textContent;
-            var observacao = document.getElementById("observacao").value;
+            var observacao = document.getElementById("observacao").value || "Nenhuma";
             var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
             var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
-            var numero = document.getElementById("numero").value;
-            var referencia = document.getElementById("referencia").value;
+            var numero = document.getElementById("numero").value || "S/N";
+            var referencia = document.getElementById("referencia").value || "Nenhuma";
             var pagamento = document.getElementById("pagamento").value;
-            var troco = document.getElementById("troco").value;
+            var troco = document.getElementById("troco").value || "Não precisa";
             var precoFinal = document.getElementById("precoFinal").textContent;
 
-            var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
+            var mensagem = `*Pedido Caseirão Burger*%0A` +
+                           `--------------------------------------------%0A` +
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
                            `*Quantidade:* ${quantidade}%0A` +
                            `*Ingredientes:* ${ingredientes}%0A` +
                            `*Observações:* ${observacao}%0A` +
+                           `--------------------------------------------%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}, Nº ${numero}%0A` +
                            `*Ponto de Referência:* ${referencia}%0A` +
+                           `--------------------------------------------%0A` +
                            `*Forma de Pagamento:* ${pagamento}%0A` +
                            `*Troco:* ${troco}%0A` +
+                           `--------------------------------------------%0A` +
                            `*Preço Total:* ${precoFinal}%0A`;
 
             var url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
