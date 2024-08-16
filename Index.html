@@ -53,7 +53,7 @@
         <input type="text" id="nome" name="nome" required>
 
         <label for="hamburguer">Escolha seu Hambúrguer:</label>
-        <select id="hamburguer" name="hamburguer" required>
+        <select id="hamburguer" name="hamburguer" required onchange="atualizarIngredientes()">
             <option value="Sujinho - R$ 13">Sujinho - R$ 13</option>
             <option value="Pé pra fora - R$ 15">Pé pra fora - R$ 15</option>
             <option value="Pobr's - R$ 17">Pobr's - R$ 17</option>
@@ -64,6 +64,8 @@
             <option value="Mata fome - R$ 40">Mata fome - R$ 40</option>
             <option value="Zambuque - R$ 18">Zambuque - R$ 18</option>
         </select>
+
+        <p id="ingredientes">Selecione um hambúrguer para ver os ingredientes.</p>
 
         <label for="tipoEntrega">Tipo de Entrega:</label>
         <select id="tipoEntrega" name="tipoEntrega" required>
@@ -88,9 +90,50 @@
     </form>
 
     <script>
+        function atualizarIngredientes() {
+            var hamburguer = document.getElementById("hamburguer").value;
+            var ingredientes = "";
+
+            switch(hamburguer) {
+                case "Sujinho - R$ 13":
+                    ingredientes = "Pão, carne, queijo, presunto, verduras e molho da casa.";
+                    break;
+                case "Pé pra fora - R$ 15":
+                    ingredientes = "Pão, carne, queijo, presunto, bacon, alface e molho da casa.";
+                    break;
+                case "Pobr's - R$ 17":
+                    ingredientes = "Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras e molho da casa.";
+                    break;
+                case "Demorô - R$ 20":
+                    ingredientes = "Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras e molho da casa.";
+                    break;
+                case "Molecão - R$ 23":
+                    ingredientes = "Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras e molho da casa.";
+                    break;
+                case "Caseirão - R$ 25":
+                    ingredientes = "Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras e molho da casa.";
+                    break;
+                case "Podrão - R$ 30":
+                    ingredientes = "Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras e molho da casa.";
+                    break;
+                case "Mata fome - R$ 40":
+                    ingredientes = "Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa.";
+                    break;
+                case "Zambuque - R$ 18":
+                    ingredientes = "Pão, carne, molho barbecue, calabresa, queijo, verduras e molho da casa.";
+                    break;
+                default:
+                    ingredientes = "Selecione um hambúrguer para ver os ingredientes.";
+                    break;
+            }
+
+            document.getElementById("ingredientes").textContent = ingredientes;
+        }
+
         function enviarPedido() {
             var nome = document.getElementById("nome").value;
             var hamburguer = document.getElementById("hamburguer").value;
+            var ingredientes = document.getElementById("ingredientes").textContent;
             var tipoEntrega = document.getElementById("tipoEntrega").value;
             var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
             var pagamento = document.getElementById("pagamento").value;
@@ -99,6 +142,7 @@
             var mensagem = `*Pedido Caseirão Burger*%0A%0A` +
                            `*Nome:* ${nome}%0A` +
                            `*Hambúrguer:* ${hamburguer}%0A` +
+                           `*Ingredientes:* ${ingredientes}%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
                            `*Endereço:* ${endereco}%0A` +
                            `*Forma de Pagamento:* ${pagamento}%0A` +
