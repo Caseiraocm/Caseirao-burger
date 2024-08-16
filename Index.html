@@ -92,6 +92,12 @@
         <label for="endereco">Endereço:</label>
         <input type="text" id="endereco" name="endereco">
 
+        <label for="numero">Número da Casa:</label>
+        <input type="text" id="numero" name="numero">
+
+        <label for="referencia">Ponto de Referência:</label>
+        <input type="text" id="referencia" name="referencia">
+
         <label for="pagamento">Forma de Pagamento:</label>
         <select id="pagamento" name="pagamento" required>
             <option value="Dinheiro">Dinheiro</option>
@@ -163,6 +169,8 @@
             var ingredientes = document.getElementById("ingredientes").textContent;
             var tipoEntrega = document.getElementById("tipoEntrega").value.split('|')[1];
             var endereco = tipoEntrega === "Entrega" ? document.getElementById("endereco").value : "Retirada no local";
+            var numero = document.getElementById("numero").value;
+            var referencia = document.getElementById("referencia").value;
             var pagamento = document.getElementById("pagamento").value;
             var troco = document.getElementById("troco").value;
             var precoFinal = document.getElementById("precoFinal").textContent;
@@ -172,10 +180,12 @@
                            `*Hambúrguer:* ${hamburguer}%0A` +
                            `*Ingredientes:* ${ingredientes}%0A` +
                            `*Tipo de Entrega:* ${tipoEntrega}%0A` +
-                           `*Endereço:* ${endereco}%0A` +
+                           `*Endereço:* ${endereco}, Nº ${numero}%0A` +
+                           `*Ponto de Referência:* ${referencia}%0A` +
                            `*Forma de Pagamento:* ${pagamento}%0A` +
+                           `*Troco:* ${troco}%0
                            `*Troco:* ${troco}%0A` +
-                           `*${precoFinal}*`;
+                           `*Preço Total:* ${precoFinal}%0A`;
 
             var url = `https://wa.me/5586995033988?text=${mensagem}`;
             window.open(url, '_blank');
