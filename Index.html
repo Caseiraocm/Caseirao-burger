@@ -73,13 +73,18 @@
             width: 60px;
         }
 
-        input[type="number"], select, textarea {
+        input[type="number"], select, textarea, input[type="text"] {
             width: 100%;
             padding: 8px;
             margin-top: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
+        }
+
+        select {
+            background-color: #fff;
+            cursor: pointer;
         }
 
         button {
@@ -117,6 +122,16 @@
             color: #333;
             margin-bottom: 5px;
             display: block;
+        }
+
+        .form-section .input-group {
+            margin-bottom: 15px;
+        }
+
+        .form-section .input-group label {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -211,40 +226,53 @@
 
             <div class="form-section">
                 <h2>Informações do Cliente</h2>
-                <label for="nomeCliente">Nome:</label>
-                <input type="text" id="nomeCliente" name="nomeCliente" required>
-
-                <label for="endereco">Endereço:</label>
-                <input type="text" id="endereco" name="endereco" required>
-
-                <label for="numero">Número da Casa:</label>
-                <input type="text" id="numero" name="numero" required>
-
-                <label for="referencia">Ponto de Referência:</label>
-                <input type="text" id="referencia" name="referencia">
-
-                <label for="observacoes">Observações:</label>
-                <textarea id="observacoes" name="observacoes"></textarea>
+                <div class="input-group">
+                    <label for="nomeCliente">Nome Completo:</label>
+                    <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Digite seu nome completo" required>
+                </div>
+                <div class="input-group">
+                    <label for="endereco">Endereço Completo:</
+                        <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro" required>
+                </div>
+                <div class="input-group">
+                    <label for="numero">Número da Casa:</label>
+                    <input type="text" id="numero" name="numero" placeholder="Número da casa" required>
+                </div>
+                <div class="input-group">
+                    <label for="referencia">Ponto de Referência:</label>
+                    <input type="text" id="referencia" name="referencia" placeholder="Opcional">
+                </div>
+                <div class="input-group">
+                    <label for="observacoes">Observações:</label>
+                    <textarea id="observacoes" name="observacoes" placeholder="Exemplo: Sem cebola, maionese à parte"></textarea>
+                </div>
             </div>
 
             <div class="form-section">
                 <h2>Forma de Pagamento</h2>
-                <select id="formaPagamento" name="formaPagamento">
-                    <option value="dinheiro">Dinheiro</option>
-                    <option value="cartao">Cartão</option>
-                    <option value="pix">PIX</option>
-                </select>
-
-                <label for="troco">Precisa de troco?</label>
-                <input type="text" id="troco" name="troco">
+                <div class="input-group">
+                    <label for="formaPagamento">Selecione a forma de pagamento:</label>
+                    <select id="formaPagamento" name="formaPagamento">
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="cartao">Cartão</option>
+                        <option value="pix">PIX</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="troco">Precisa de troco?</label>
+                    <input type="text" id="troco" name="troco" placeholder="Troco para quanto? (deixe em branco se não precisar)">
+                </div>
             </div>
 
             <div class="form-section">
                 <h2>Opções de Entrega</h2>
-                <select id="entrega" name="entrega" onchange="calcularTotal()">
-                    <option value="entrega">Entrega (R$ 5,00)</option>
-                    <option value="retirada">Retirada</option>
-                </select>
+                <div class="input-group">
+                    <label for="entrega">Escolha a opção:</label>
+                    <select id="entrega" name="entrega" onchange="calcularTotal()">
+                        <option value="entrega">Entrega (R$ 5,00)</option>
+                        <option value="retirada">Retirada</option>
+                    </select>
+                </div>
             </div>
 
             <div class="total">Total: R$ <span id="total">0.00</span></div>
