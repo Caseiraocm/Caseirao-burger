@@ -73,10 +73,14 @@
         }
 
         .burger {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 15px;
+        }
+
+        .burger-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
         }
 
         .burger-description {
@@ -102,59 +106,43 @@
 
             <!-- Hambúrgueres com descrição e preço -->
             <div class="burger">
-                <div>
-                    <label for="sujinho">Sujinho - R$ 13</label>
-                    <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
-                </div>
+                <div class="burger-title">Sujinho - R$ 13</div>
+                <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
                 <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
             </div>
             <div class="burger">
-                <div>
-                    <label for="pePraFora">Pé pra Fora - R$ 15</label>
-                    <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
-                </div>
+                <div class="burger-title">Pé pra Fora - R$ 15</div>
+                <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
                 <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
             </div>
             <div class="burger">
-                <div>
-                    <label for="pobrs">Pobr's - R$ 17</label>
-                    <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
-                </div>
+                <div class="burger-title">Pobr's - R$ 17</div>
+                <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
                 <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
             </div>
             <div class="burger">
-                <div>
-                    <label for="demoro">Demorô - R$ 20</label>
-                    <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
-                </div>
+                <div class="burger-title">Demorô - R$ 20</div>
+                <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
                 <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
             </div>
             <div class="burger">
-                <div>
-                    <label for="molecao">Molecão - R$ 23</label>
-                    <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
-                </div>
+                <div class="burger-title">Molecão - R$ 23</div>
+                <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
                 <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
             </div>
             <div class="burger">
-                <div>
-                    <label for="caseirao">Caseirão - R$ 25</label>
-                    <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
-                </div>
+                <div class="burger-title">Caseirão - R$ 25</div>
+                <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
                 <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
             </div>
             <div class="burger">
-                <div>
-                    <label for="podrao">Podrão - R$ 30</label>
-                    <div class="burger-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
-                </div>
+                <div class="burger-title">Podrão - R$ 30</div>
+                <div class="burger-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
                 <input type="number" id="podrao" name="podrao" value="0" min="0" data-price="30">
             </div>
             <div class="burger">
-                <div>
-                    <label for="mataFome">Mata Fome - R$ 40</label>
-                    <div class="burger-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
-                </div>
+                <div class="burger-title">Mata Fome - R$ 40</div>
+                <div class="burger-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
                 <input type="number" id="mataFome" name="mataFome" value="0" min="0" data-price="40">
             </div>
 
@@ -218,6 +206,7 @@
         function gerarPedido() {
             let nomeCliente = document.getElementById('nomeCliente').value;
             let endereco = document.getElementById('endereco').value;
+            let numero = document.getElementById('numero').value;
             let referencia = document.getElementById('referencia').value;
             let observacoes = document.getElementById('observacoes').value;
             let formaPagamento = document.getElementById('formaPagamento').value;
@@ -233,8 +222,8 @@
             document.querySelectorAll('input[type="number"]').forEach(function(input) {
                 const quantidade = parseInt(input.value);
                 if (quantidade > 0) {
-                    const nome = input.previousElementSibling.querySelector('label').textContent;
-                    const descricao = input.previousElementSibling.querySelector('.burger-description').textContent;
+                    const nome = input.previousElementSibling.previousElementSibling.textContent;
+                    const descricao = input.previousElementSibling.textContent;
                     mensagem += `\n${nome}: ${quantidade}x\n${descricao}`;
                 }
             });
@@ -245,7 +234,7 @@
             mensagem += `\n\n*Opção de Entrega:* ${entrega}`;
             mensagem += `\n\n*Total:* R$ ${document.getElementById('total').innerText}`;
 
-            let url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
+            let url = `https://wa.me/55SEUNUMERO?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
         }
     </script>
