@@ -68,32 +68,9 @@
 
         .burger-quantity {
             display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .quantity-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-buttons button {
-            width: 30px;
-            height: 30px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            font-size: 18px;
-            cursor: pointer;
-            text-align: center;
-            line-height: 1;
-        }
-
-        .quantity-buttons input[type="number"] {
-            width: 50px;
-            height: 30px;
-            text-align: center;
-            border: 1px solid #ccc;
-            margin: 0 5px;
-            font-size: 16px;
+            width: 60px;
         }
 
         input[type="number"], select, textarea, input[type="text"] {
@@ -173,11 +150,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="sujinho">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
                     </div>
                 </div>
                 <div class="burger">
@@ -187,11 +160,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="pePraFora">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
                     </div>
                 </div>
                 <div class="burger">
@@ -201,11 +170,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="pobrs">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
                     </div>
                 </div>
                 <div class="burger">
@@ -215,11 +180,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="demoro">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
                     </div>
                 </div>
                 <div class="burger">
@@ -229,11 +190,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="molecao">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
                     </div>
                 </div>
                 <div class="burger">
@@ -243,259 +200,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="caseirao">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
-                            <button type="<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caseirão Burger - Pedido Online Profissional</title>
-    <style>
-        /* Estilo Geral */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-image: linear-gradient(to right, #ff5722, #ff7043);
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 20px 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            width: 100%;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-
-        h2 {
-            font-size: 22px;
-            color: #ff5722;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #ff5722;
-            padding-bottom: 5px;
-        }
-
-        .burger {
-            margin-bottom: 15px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fafafa;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .burger-title {
-            font-weight: bold;
-            font-size: 18px;
-            color: #333;
-        }
-
-        .burger-description {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .burger-quantity {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-buttons button {
-            width: 30px;
-            height: 30px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            font-size: 18px;
-            cursor: pointer;
-            text-align: center;
-            line-height: 1;
-        }
-
-        .quantity-buttons input[type="number"] {
-            width: 50px;
-            height: 30px;
-            text-align: center;
-            border: 1px solid #ccc;
-            margin: 0 5px;
-            font-size: 16px;
-        }
-
-        input[type="number"], select, textarea, input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        select {
-            background-color: #fff;
-            cursor: pointer;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #e64a19;
-        }
-
-        .total {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-            text-align: right;
-            color: #ff5722;
-        }
-
-        .form-section {
-            margin-bottom: 30px;
-        }
-
-        .form-section label {
-            font-weight: bold;
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .form-section .input-group {
-            margin-bottom: 15px;
-        }
-
-        .form-section .input-group label {
-            display: inline-block;
-            width: 100%;
-            margin-bottom: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Caseirão Burger - Faça seu Pedido</h1>
-        
-        <form id="pedidoForm">
-            <div class="form-section">
-                <h2>Escolha seus Hambúrgueres</h2>
-                <!-- Hambúrgueres no menu -->
-                <div class="burger">
-                    <div>
-                        <div class="burger-title">Sujinho - R$ 13</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
-                    </div>
-                    <div class="burger-quantity">
-                        <label for="sujinho">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="burger">
-                    <div>
-                        <div class="burger-title">Pé pra Fora - R$ 15</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
-                    </div>
-                    <div class="burger-quantity">
-                        <label for="pePraFora">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="burger">
-                    <div>
-                        <div class="burger-title">Pobr's - R$ 17</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
-                    </div>
-                    <div class="burger-quantity">
-                        <label for="pobrs">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="burger">
-                    <div>
-                        <div class="burger-title">Demorô - R$ 20</div>
-                        <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
-                    </div>
-                    <div class="burger-quantity">
-                        <label for="demoro">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="burger">
-                    <div>
-                        <div class="burger-title">Molecão - R$ 23</div>
-                        <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
-                    </div>
-                    <div class="burger-quantity">
-                        <label for="molecao">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
-                            <button type="button" class="plus">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="burger">
-                    <div>
-                        <div class="burger-title">Caseirão - R$ 25</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
-                    </div>
-                    <div class="burger-quantity">
-                        <label for="caseirao">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
                     </div>
                 </div>
                 <div class="burger">
@@ -505,11 +210,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="podrao">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="podrao" name="podrao" value="0" min="0" data-price="30">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="podrao" name="podrao" value="0" min="0" data-price="30">
                     </div>
                 </div>
                 <div class="burger">
@@ -519,11 +220,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="mataFome">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="mataFome" name="mataFome" value="0" min="0" data-price="40">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="mataFome" name="mataFome" value="0" min="0" data-price="40">
                     </div>
                 </div>
                 <div class="burger">
@@ -533,11 +230,7 @@
                     </div>
                     <div class="burger-quantity">
                         <label for="major">Qtd</label>
-                        <div class="quantity-buttons">
-                            <button type="button" class="minus">-</button>
-                            <input type="number" id="major" name="major" value="0" min="0" data-price="23">
-                            <button type="button" class="plus">+</button>
-                        </div>
+                        <input type="number" id="major" name="major" value="0" min="0" data-price="23">
                     </div>
                 </div>
             </div>
@@ -618,25 +311,6 @@
         // Adiciona o evento de mudança em todos os inputs para recalcular o total
         document.querySelectorAll('input[type="number"]').forEach(function(input) {
             input.addEventListener('input', calcularTotal);
-        });
-
-        // Lógica para os botões + e -
-        document.querySelectorAll('.plus').forEach(button => {
-            button.addEventListener('click', function() {
-                let quantityInput = this.parentElement.querySelector('input[type="number"]');
-                quantityInput.value = parseInt(quantityInput.value) + 1;
-                calcularTotal();
-            });
-        });
-
-        document.querySelectorAll('.minus').forEach(button => {
-            button.addEventListener('click', function() {
-                let quantityInput = this.parentElement.querySelector('input[type="number"]');
-                if (quantityInput.value > 0) {
-                    quantityInput.value = parseInt(quantityInput.value) - 1;
-                    calcularTotal();
-                }
-            });
         });
 
         // Função para gerar o pedido e enviar para o WhatsApp
