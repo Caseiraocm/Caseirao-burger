@@ -3,298 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caseirão Burger</title>
+    <title>Caseirão Burger - Pedido Online</title>
     <style>
+        /* Estilos CSS */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
-            color: #34495e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        header {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        section {
-            background-color: #ecf0f1;
+            color: #333;
             margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e74c3c;
-            padding-bottom: 10px;
+            font-size: 18px;
+            color: #ff5722;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
         }
 
         label {
-            display: block;
             margin: 10px 0 5px;
             font-weight: bold;
         }
 
-        input[type="text"], input[type="number"], select {
-            width: 100%;
+        input, select, textarea {
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #bdc3c7;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box;
+            margin-bottom: 15px;
             font-size: 16px;
-            color: #2c3e50;
-        }
-
-        .burger-item {
-            margin-bottom: 25px;
-            border-bottom: 1px solid #bdc3c7;
-            padding-bottom: 15px;
-        }
-
-        .burger-item h3 {
-            margin-bottom: 5px;
-            color: #e74c3c;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #e74c3c;
-            display: block;
-            margin: 5px 0;
-            font-size: 18px;
+            width: 100%;
         }
 
         button {
-            background-color: #e74c3c;
-            color: #fff;
             padding: 15px;
+            background-color: #ff5722;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #c0392b;
+            background-color: #e64a19;
         }
 
-        #pedido-resumo p {
-            font-size: 20px;
-            margin: 15px 0;
+        .burger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .burger-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .total {
+            font-size: 18px;
             font-weight: bold;
-            text-align: center;
+            margin-top: 20px;
+            text-align: right;
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="container">
         <h1>Caseirão Burger</h1>
-    </header>
+        
+        <form id="pedidoForm">
+            <h2>Escolha seus Hambúrgueres</h2>
 
-    <main>
-        <section id="cliente-info">
-            <h2>Informações do Cliente</h2>
-            <label for="cliente-nome">Nome:</label>
-            <input type="text" id="cliente-nome" name="cliente-nome" required>
-        </section>
-
-        <section id="menu">
-            <h2>Escolha seus Lanches</h2>
-
-            <div class="burger-item">
-                <h3>Sujinho</h3>
-                <p>Pão, carne, queijo, presunto, verduras e molho da casa</p>
-                <span class="price">R$ 13,00</span>
-                <label for="qty-sujinho">Quantidade:</label>
-                <input type="number" id="qty-sujinho" name="qty-sujinho" min="0" max="10" value="0">
+            <!-- Hambúrgueres com descrição e preço -->
+            <div class="burger">
+                <div>
+                    <label for="sujinho">Sujinho - R$ 13</label>
+                    <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
+                </div>
+                <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="pePraFora">Pé pra Fora - R$ 15</label>
+                    <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
+                </div>
+                <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="pobrs">Pobr's - R$ 17</label>
+                    <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
+                </div>
+                <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="demoro">Demorô - R$ 20</label>
+                    <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
+                </div>
+                <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="molecao">Molecão - R$ 23</label>
+                    <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
+                </div>
+                <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="caseirao">Caseirão - R$ 25</label>
+                    <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
+                </div>
+                <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="podrao">Podrão - R$ 30</label>
+                    <div class="burger-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
+                </div>
+                <input type="number" id="podrao" name="podrao" value="0" min="0" data-price="30">
+            </div>
+            <div class="burger">
+                <div>
+                    <label for="mataFome">Mata Fome - R$ 40</label>
+                    <div class="burger-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
+                </div>
+                <input type="number" id="mataFome" name="mataFome" value="0" min="0" data-price="40">
             </div>
 
-            <div class="burger-item">
-                <h3>Pé pra fora</h3>
-                <p>Pão, carne, queijo, presunto, bacon, alface e molho da casa</p>
-                <span class="price">R$ 15,00</span>
-                <label for="qty-peprafora">Quantidade:</label>
-                <input type="number" id="qty-peprafora" name="qty-peprafora" min="0" max="10" value="0">
-            </div>
+            <h2>Informações do Pedido</h2>
+            
+            <label for="nomeCliente">Nome:</label>
+            <input type="text" id="nomeCliente" name="nomeCliente" required>
 
-            <div class="burger-item">
-                <h3>Pobr's</h3>
-                <p>Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras e molho da casa</p>
-                <span class="price">R$ 17,00</span>
-                <label for="qty-pobrs">Quantidade:</label>
-                <input type="number" id="qty-pobrs" name="qty-pobrs" min="0" max="10" value="0">
-            </div>
-
-            <div class="burger-item">
-                <h3>Demorô</h3>
-                <p>Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras e molho da casa</p>
-                <span class="price">R$ 20,00</span>
-                <label for="qty-demoro">Quantidade:</label>
-                <input type="number" id="qty-demoro" name="qty-demoro" min="0" max="10" value="0">
-            </div>
-
-            <div class="burger-item">
-                <h3>Molecão</h3>
-                <p>Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras e molho da casa</p>
-                <span class="price">R$ 23,00</span>
-                <label for="qty-molecao">Quantidade:</label>
-                <input type="number" id="qty-molecao" name="qty-molecao" min="0" max="10" value="0">
-            </div>
-
-            <div class="burger-item">
-                <h3>Caseirão</h3>
-                <p>Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras e molho da casa</p>
-                <span class="price">R$ 25,00</span>
-                <label for="qty-caseirao">Quantidade:</label>
-                <input type="number" id="qty-caseirao" name="qty-caseirao" min="0" max="10" value="0">
-            </div>
-
-            <div class="burger-item">
-                <h3>Podrão</h3>
-                <p>Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras e molho da casa</p>
-                <span class="price">R$ 30,00</span>
-                <label for="qty-podrao">Quantidade:</label>
-                <input type="number" id="qty-podrao" name="qty-podrao" min="0" max="10" value="0">
-            </div>
-
-            <div class="burger-item">
-                <h3>Mata fome</h3>
-                <p>Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar e molho da casa</p>
-                <span class="price">R$ 40,00</span>
-                <label for="qty-matafome">Quantidade:</label>
-                <input type="number" id="qty-matafome" name="qty-matafome" min="0" max="10" value="0">
-            </div>
-        </section>
-
-        <section id="endereco-info">
-            <h2>Informações de Entrega</h2>
             <label for="endereco">Endereço:</label>
             <input type="text" id="endereco" name="endereco" required>
 
-            <label for="numero-casa">Número da Casa:</label>
-            <input type="text" id="numero-casa" name="numero-casa" required>
+            <label for="numero">Número da Casa:</label>
+            <input type="text" id="numero" name="numero" required>
 
-            <label for="ponto-referencia">Ponto de Referência:</label>
-            <input type="text" id="ponto-referencia" name="ponto-referencia">
-        </section>
+            <label for="referencia">Ponto de Referência:</label>
+            <input type="text" id="referencia" name="referencia">
 
-        <section id="pedido">
-            <h2>Resumo do Pedido</h2>
-            <div id="pedido-resumo">
-                <p>Total: R$ <span id="total-valor">0,00</span></p>
-            </div>
-            <button type="submit" id="enviar-pedido">Enviar Pedido</button>
-        </section>
-    </main>
+            <label for="observacoes">Observações:</label>
+            <textarea id="observacoes" name="observacoes"></textarea>
+
+            <h2>Forma de Pagamento</h2>
+            <select id="formaPagamento" name="formaPagamento">
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão</option>
+                <option value="pix">PIX</option>
+            </select>
+
+            <label for="troco">Precisa de troco?</label>
+            <input type="text" id="troco" name="troco">
+
+            <h2>Opções de Entrega</h2>
+            <select id="entrega" name="entrega">
+                <option value="entrega">Entrega</option>
+                <option value="retirada">Retirada</option>
+            </select>
+
+            <div class="total">Total: R$ <span id="total">0.00</span></div>
+
+            <button type="button" onclick="gerarPedido()">Enviar Pedido</button>
+        </form>
+    </div>
 
     <script>
+        // Função para calcular o valor total
         function calcularTotal() {
             let total = 0;
-
-            const sujinhoQty = document.getElementById('qty-sujinho').value;
-            const pepraforaQty = document.getElementById('qty-peprafora').value;
-            const pobrsQty = document.getElementById('qty-pobrs').value;
-            const demoroQty = document.getElementById('qty-demoro').value;
-            const molecaoQty = document.getElementById('qty-molecao').value;
-            const caseiraoQty = document.getElementById('qty-caseirao').value;
-            const podraoQty = document.getElementById('qty-podrao').value;
-            const matafomeQty = document.getElementById('qty-matafome').value;
-
-            total += sujinhoQty * 13;
-            total += pepraforaQty * 15;
-            total += pobrsQty * 17;
-            total += demoroQty * 20;
-            total += molecaoQty * 23;
-            total += caseiraoQty * 25;
-            total += podraoQty * 30;
-            total += matafomeQty * 40;
-
-            document.getElementById('total-valor').textContent = total.toFixed(2);
+            document.querySelectorAll('input[type="number"]').forEach(function(input) {
+                const quantidade = parseInt(input.value);
+                const preco = parseFloat(input.getAttribute('data-price'));
+                total += quantidade * preco;
+            });
+            document.getElementById('total').innerText = total.toFixed(2);
         }
 
-        document.querySelectorAll('input[type="number"]').forEach(input => {
+        // Adiciona o evento de mudança em todos os inputs para recalcular o total
+        document.querySelectorAll('input[type="number"]').forEach(function(input) {
             input.addEventListener('input', calcularTotal);
         });
 
-        document.getElementById('enviar-pedido').addEventListener('click', function() {
-            const nome = document.getElementById('cliente-nome').value;
-            const endereco = document.getElementById('endereco').value;
-            const numeroCasa = document.getElementById('numero-casa').value;
-            const pontoReferencia = document.getElementById('ponto-referencia').value;
+        // Função para gerar o pedido e enviar para o WhatsApp
+        function gerarPedido() {
+            let nomeCliente = document.getElementById('nomeCliente').value;
+            let endereco = document.getElementById('endereco').value;
+            let referencia = document.getElementById('referencia').value;
+            let observacoes = document.getElementById('observacoes').value;
+            let formaPagamento = document.getElementById('formaPagamento').value;
+            let troco = document.getElementById('troco').value;
+            let entrega = document.getElementById('entrega').value;
 
-            let message = `Pedido de ${nome}:\n\n`;
+            let mensagem = `*Pedido de ${nomeCliente}*\n`;
+            mensagem += `\n*Endereço:* ${endereco}, Nº: ${numero}`;
+            if (referencia) mensagem += `\n*Referência:* ${referencia}`;
+            mensagem += `\n\n*Hambúrgueres:*`;
+            
+            // Adiciona hambúrgueres ao pedido se a quantidade for maior que 0
+            document.querySelectorAll('input[type="number"]').forEach(function(input) {
+                const quantidade = parseInt(input.value);
+                if (quantidade > 0) {
+                    const nome = input.previousElementSibling.querySelector('label').textContent;
+                    const descricao = input.previousElementSibling.querySelector('.burger-description').textContent;
+                    mensagem += `\n${nome}: ${quantidade}x\n${descricao}`;
+                }
+            });
 
-            const sujinhoQty = document.getElementById('qty-sujinho').value;
-            if (sujinhoQty > 0) {
-                message += `Sujinho: ${sujinhoQty} unidade(s) - R$ ${(sujinhoQty * 13).toFixed(2)}\n`;
-            }
+            if (observacoes) mensagem += `\n\n*Observações:* ${observacoes}`;
+            mensagem += `\n\n*Forma de Pagamento:* ${formaPagamento}`;
+            if (troco) mensagem += `\n*Troco para:* R$ ${troco}`;
+            mensagem += `\n\n*Opção de Entrega:* ${entrega}`;
+            mensagem += `\n\n*Total:* R$ ${document.getElementById('total').innerText}`;
 
-            const pepraforaQty = document.getElementById('qty-peprafora').value;
-            if (pepraforaQty > 0) {
-                message += `Pé pra fora: ${pepraforaQty} unidade(s) - R$ ${(pepraforaQty * 15).toFixed(2)}\n`;
-            }
-
-            const pobrsQty = document.getElementById('qty-pobrs').value;
-            if (pobrsQty > 0) {
-                message += `Pobr's: ${pobrsQty} unidade(s) - R$ ${(pobrsQty * 17).toFixed(2)}\n`;
-            }
-
-            const demoroQty = document.getElementById('qty-demoro').value;
-            if (demoroQty > 0) {
-                message += `Demorô: ${demoroQty} unidade(s) - R$ ${(demoroQty * 20).toFixed(2)}\n`;
-            }
-
-            const molecaoQty = document.getElementById('qty-molecao').value;
-            if (molecaoQty > 0) {
-                message += `Molecão: ${molecaoQty} unidade(s) - R$ ${(molecaoQty * 23).toFixed(2)}\n`;
-            }
-
-            const caseiraoQty = document.getElementById('qty-caseirao').value;
-            if (caseiraoQty > 0) {
-                message += `Caseirão: ${caseiraoQty} unidade(s) - R$ ${(caseiraoQty * 25).toFixed(2)}\n`;
-            }
-
-            const podraoQty = document.getElementById('qty-podrao').value;
-            if (podraoQty > 0) {
-                message += `Podrão: ${podraoQty} unidade(s) - R$ ${(podraoQty * 30).toFixed(2)}\n`;
-            }
-
-            const matafomeQty = document.getElementById('qty-matafome').value;
-            if (matafomeQty > 0) {
-                message += `Mata fome: ${matafomeQty} unidade(s) - R$ ${(matafomeQty * 40).toFixed(2)}\n`;
-            }
-
-            message += `\nEndereço: ${endereco}\nNúmero: ${numeroCasa}\nPonto de Referência: ${pontoReferencia}\n`;
-            message += `\nTotal: R$ ${document.getElementById('total-valor').textContent}`;
-
-            const confirmacao = confirm(`Deseja enviar o seguinte pedido?\n\n${message}`);
-            if (confirmacao) {
-                const whatsappUrl = `https://wa.me/5586995033988?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            }
-        });
+            let url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
