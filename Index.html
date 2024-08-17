@@ -142,6 +142,7 @@
         <form id="pedidoForm">
             <div class="form-section">
                 <h2>Escolha seus Hambúrgueres</h2>
+                <!-- Hambúrgueres no menu -->
                 <div class="burger">
                     <div>
                         <div class="burger-title">Sujinho - R$ 13</div>
@@ -314,39 +315,42 @@
 
         // Função para gerar o pedido e enviar para o WhatsApp
         function gerarPedido() {
-            let nomeCliente = document.getElementById('nomeCliente').value;
-            let endereco = document.getElementById('endereco').value;
-            let numero = document.getElementById('numero').value;
-            let referencia = document.getElementById('referencia').value;
-            let observacoes = document.getElementById('observacoes').value;
+            let nomeCliente = document.getElementById('nomeCliente').value || 'Não informado';
+            let endereco = document.getElementById('endereco').value || 'Retirada no local';
+            let numero = document.getElementById('numero').value || 'N/A';
+            let referencia = document.getElementById('referencia').value || 'N/A';
+            let observacoes = document.getElementById('observacoes').value || 'Nenhuma';
             let formaPagamento = document.getElementById('formaPagamento').value;
-            let troco = document.getElementById('troco').value;
+            let troco = document.getElementById('troco').value || 'Não precisa';
             let entrega = document.getElementById('entrega').value;
 
-            let mensagem = `*Pedido de ${nomeCliente}*\n`;
-            mensagem += `\n*Endereço:* ${endereco}, Nº: ${numero}`;
-            if (referencia) mensagem += `\n*Referência:* ${referencia}`;
-            mensagem += `\n\n*Hambúrgueres:*`;
+            let mensagem = `*Pedido Caseirão Burger*\n--------------------------------------------\n`;
+            mensagem += `*Nome:* ${nomeCliente}\n`;
 
-            // Adiciona hambúrgueres ao pedido se a quantidade for maior que 0
-            document.querySelectorAll('input[type="number"]').forEach(function(input) {
-                const quantidade = parseInt(input.value);
+            document.querySelectorAll('.burger').forEach(function(burger, index) {
+                const quantidade = parseInt(burger.querySelector('input[type="number"]').value);
                 if (quantidade > 0) {
-                    const nome = input.closest('.burger').querySelector('.burger-title').textContent;
-                    const descricao = input.closest('.burger').querySelector('.burger-description').textContent;
-                    mensagem += `\n${nome}: ${quantidade}x\n${descricao}`;
+                    const nome = burger.querySelector('.burger-title').textContent;
+                    const preco = burger.querySelector('input[type="number"]').getAttribute('data-price');
+                    const descricao = burger.querySelector('.burger-description').textContent;
+
+                    mensagem += `*Hambúrguer ${index + 1}:* ${nome} - R$ ${preco}\n`;
+                    mensagem += `*Quantidade:* ${quantidade}\n`;
+                    mensagem += `*Ingredientes:* ${descricao}\n`;
+                    mensagem += `*Observações:* ${observacoes}\n--------------------------------------------\n`;
                 }
             });
 
-            if (observacoes) mensagem += `\n\n*Observações:* ${observacoes}`;
-            mensagem += `\n\n*Forma de Pagamento:* ${formaPagamento}`;
-            if (troco) mensagem += `\n*Troco para:* R$ ${troco}`;
-            mensagem += `\n\n*Opção de Entrega:* ${entrega}`;
-            mensagem += `\n\n*Total:* R$ ${document.getElementById('total').innerText}`;
+            mensagem += `*Tipo de Entrega:* ${entrega}\n`;
+            mensagem += `*Endereço:* ${endereco}, Nº ${numero}\n`;
+            mensagem += `*Ponto de Referência:* ${referencia}\n--------------------------------------------\n`;
+            mensagem += `*Forma de Pagamento:* ${formaPagamento}\n`;
+            mensagem += `*Troco:* ${troco}\n--------------------------------------------\n`;
+            mensagem += `*Preço Total:* R$ ${document.getElementById('total').innerText}`;
 
             let url = `https://wa.me/5586995033988?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
         }
     </script>
 </body>
-</html>
+    </html>
