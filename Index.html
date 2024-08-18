@@ -44,11 +44,14 @@
         }
 
         .burger {
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #fafafa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .burger-title {
@@ -63,27 +66,11 @@
             margin-top: 5px;
         }
 
-        .burger-quantity,
-        .adicionais {
-            margin-top: 10px;
-        }
-
-        .adicionais {
+        .burger-quantity {
             display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 8px;
-        }
-
-        .adicional {
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            font-size: 12px; /* Tamanho menor para os adicionais */
-            color: #555; /* Cor mais sutil */
-        }
-
-        .adicional label {
-            margin-left: 3px;
+            width: 60px;
         }
 
         input[type="number"], select, textarea, input[type="text"] {
@@ -155,292 +142,95 @@
         <form id="pedidoForm">
             <div class="form-section">
                 <h2>Escolha seus Hambúrgueres</h2>
-
-                <!-- Sujinho -->
+                <!-- Hambúrgueres no menu -->
                 <div class="burger">
-                    <div class="burger-title">Sujinho - R$ 13</div>
-                    <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Sujinho - R$ 13</div>
+                        <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="sujinho">Quantidade:</label>
+                        <label for="sujinho">Qtd</label>
                         <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_sujinho" data-price="7">
-                            <label for="carne_sujinho">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_sujinho" data-price="8">
-                            <label for="cebola_sujinho">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_sujinho" data-price="3">
-                            <label for="queijo_sujinho">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_sujinho" data-price="3">
-                            <label for="presunto_sujinho">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_sujinho" data-price="3">
-                            <label for="ovo_sujinho">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Pé pra Fora -->
                 <div class="burger">
-                    <div class="burger-title">Pé pra Fora - R$ 15</div>
-                    <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Pé pra Fora - R$ 15</div>
+                        <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="pePraFora">Quantidade:</label>
+                        <label for="pePraFora">Qtd</label>
                         <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_pePraFora" data-price="7">
-                            <label for="carne_pePraFora">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_pePraFora" data-price="8">
-                            <label for="cebola_pePraFora">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_pePraFora" data-price="3">
-                            <label for="queijo_pePraFora">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_pePraFora" data-price="3">
-                            <label for="presunto_pePraFora">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_pePraFora" data-price="3">
-                            <label for="ovo_pePraFora">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Pobr's -->
                 <div class="burger">
-                    <div class="burger-title">Pobr's - R$ 17</div>
-                    <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Pobr's - R$ 17</div>
+                        <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="pobrs">Quantidade:</label>
+                        <label for="pobrs">Qtd</label>
                         <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_pobrs" data-price="7">
-                            <label for="carne_pobrs">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_pobrs" data-price="8">
-                            <label for="cebola_pobrs">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_pobrs" data-price="3">
-                            <label for="queijo_pobrs">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_pobrs" data-price="3">
-                            <label for="presunto_pobrs">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_pobrs" data-price="3">
-                            <label for="ovo_pobrs">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Demorô -->
                 <div class="burger">
-                    <div class="burger-title">Demorô - R$ 20</div>
-                    <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Demorô - R$ 20</div>
+                        <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="demoro">Quantidade:</label>
+                        <label for="demoro">Qtd</label>
                         <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_demoro" data-price="7">
-                            <label for="carne_demoro">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_demoro" data-price="8">
-                            <label for="cebola_demoro">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_demoro" data-price="3">
-                            <label for="queijo_demoro">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_demoro" data-price="3">
-                            <label for="presunto_demoro">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_demoro" data-price="3">
-                            <label for="ovo_demoro">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Molecão -->
                 <div class="burger">
-                    <div class="burger-title">Molecão - R$ 23</div>
-                    <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Molecão - R$ 23</div>
+                        <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="molecao">Quantidade:</label>
+                        <label for="molecao">Qtd</label>
                         <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_molecao" data-price="7">
-                            <label for="carne_molecao">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_molecao" data-price="8">
-                            <label for="cebola_molecao">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_molecao" data-price="3">
-                            <label for="queijo_molecao">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_molecao" data-price="3">
-                            <label for="presunto_molecao">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_molecao" data-price="3">
-                            <label for="ovo_molecao">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Caseirão -->
                 <div class="burger">
-                    <div class="burger-title">Caseirão - R$ 25</div>
-                    <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Caseirão - R$ 25</div>
+                        <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="caseirao">Quantidade:</label>
+                        <label for="caseirao">Qtd</label>
                         <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_caseirao" data-price="7">
-                            <label for="carne_caseirao">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_caseirao" data-price="8">
-                            <label for="cebola_caseirao">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_caseirao" data-price="3">
-                            <label for="queijo_caseirao">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_caseirao" data-price="3">
-                            <label for="presunto_caseirao">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_caseirao" data-price="3">
-                            <label for="ovo_caseirao">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Podrão -->
                 <div class="burger">
-                    <div class="burger-title">Podrão - R$ 30</div>
-                    <div class="burger-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Podrão - R$ 30</div>
+                        <div class="burger-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="podrao">Quantidade:</label>
+                        <label for="podrao">Qtd</label>
                         <input type="number" id="podrao" name="podrao" value="0" min="0" data-price="30">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_podrao" data-price="7">
-                            <label for="carne_podrao">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_podrao" data-price="8">
-                            <label for="cebola_podrao">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_podrao" data-price="3">
-                            <label for="queijo_podrao">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_podrao" data-price="3">
-                            <label for="presunto_podrao">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_podrao" data-price="3">
-                            <label for="ovo_podrao">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Mata Fome -->
                 <div class="burger">
-                    <div class="burger-title">Mata Fome - R$ 40</div>
-                    <div class="burger-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
+                    <div>
+                        <div class="burger-title">Mata Fome - R$ 40</div>
+                        <div class="burger-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
+                    </div>
                     <div class="burger-quantity">
-                        <label for="mataFome">Quantidade:</label>
+                        <label for="mataFome">Qtd</label>
                         <input type="number" id="mataFome" name="mataFome" value="0" min="0" data-price="40">
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_mataFome" data-price="7">
-                            <label for="carne_mataFome">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_mataFome" data-price="8">
-                            <label for="cebola_mataFome">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_mataFome" data-price="3">
-                            <label for="queijo_mataFome">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_mataFome" data-price="3">
-                            <label for="presunto_mataFome">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_mataFome" data-price="3">
-                            <label for="ovo_mataFome">Ovo (R$ 3)</label>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Major -->
                 <div class="burger">
-                    <div class="burger-title">Major - R$ 23</div>
-                    <div class="burger-description">Pão, carne, filé de frango, molho barbecue, calabresa, molho da casa, verduras</div>
-                    <div class="burger-quantity">
-                        <label for="major">Quantidade:</label>
-                        <input type="number" id="major" name="major" value="0" min="0" data-price="23">
+                    <div>
+                        <div class="burger-title">Major - R$ 23</div>
+                        <div class="burger-description">Pão, carne, filé de frango, molho barbecue, calabresa, molho da casa, verduras</div>
                     </div>
-                    <div class="adicionais">
-                        <div class="adicional">
-                            <input type="checkbox" id="carne_major" data-price="7">
-                            <label for="carne_major">Carne (R$ 7)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="cebola_major" data-price="8">
-                            <label for="cebola_major">Cebola (R$ 8)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="queijo_major" data-price="3">
-                            <label for="queijo_major">Queijo (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="presunto_major" data-price="3">
-                            <label for="presunto_major">Presunto (R$ 3)</label>
-                        </div>
-                        <div class="adicional">
-                            <input type="checkbox" id="ovo_major" data-price="3">
-                            <label for="ovo_major">Ovo (R$ 3)</label>
-                        </div>
+                    <div class="burger-quantity">
+                        <label for="major">Qtd</label>
+                        <input type="number" id="major" name="major" value="0" min="0" data-price="23">
                     </div>
                 </div>
             </div>
@@ -503,7 +293,7 @@
     </div>
 
     <script>
-        // Função para calcular o valor total, incluindo adicionais e taxa de entrega
+        // Função para calcular o valor total, incluindo taxa de entrega
         function calcularTotal() {
             let total = 0;
             document.querySelectorAll('input[type="number"]').forEach(function(input) {
@@ -511,13 +301,6 @@
                 const preco = parseFloat(input.getAttribute('data-price'));
                 total += quantidade * preco;
             });
-
-            document.querySelectorAll('.adicionais input[type="checkbox"]').forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    total += parseFloat(checkbox.getAttribute('data-price'));
-                }
-            });
-
             const entrega = document.getElementById('entrega').value;
             if (entrega === 'entrega') {
                 total += 5; // Taxa de entrega de R$ 5,00
@@ -528,10 +311,6 @@
         // Adiciona o evento de mudança em todos os inputs para recalcular o total
         document.querySelectorAll('input[type="number"]').forEach(function(input) {
             input.addEventListener('input', calcularTotal);
-        });
-
-        document.querySelectorAll('.adicionais input[type="checkbox"]').forEach(function(checkbox) {
-            checkbox.addEventListener('change', calcularTotal);
         });
 
         // Função para gerar o pedido e enviar para o WhatsApp
@@ -558,20 +337,6 @@
                     mensagem += `*Hambúrguer ${index + 1}:* ${nome} - R$ ${preco}\n`;
                     mensagem += `*Quantidade:* ${quantidade}\n`;
                     mensagem += `*Ingredientes:* ${descricao}\n`;
-
-                    // Adicionais
-                    let adicionaisSelecionados = [];
-                    burger.querySelectorAll('.adicionais input[type="checkbox"]').forEach(function(checkbox) {
-                        if (checkbox.checked) {
-                            const adicional = checkbox.nextElementSibling.textContent;
-                            adicionaisSelecionados.push(adicional);
-                        }
-                    });
-
-                    if (adicionaisSelecionados.length > 0) {
-                        mensagem += `*Adicionais:* ${adicionaisSelecionados.join(', ')}\n`;
-                    }
-
                     mensagem += `*Observações:* ${observacoes}\n--------------------------------------------\n`;
                 }
             });
@@ -588,4 +353,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
