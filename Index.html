@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caseirão Burger - Pedido Online Profissional</title>
     <style>
-        /* Estilo Geral */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
@@ -43,7 +42,7 @@
             padding-bottom: 5px;
         }
 
-        .burger {
+        .item {
             margin-bottom: 15px;
             padding: 15px;
             border: 1px solid #ddd;
@@ -54,19 +53,19 @@
             align-items: center;
         }
 
-        .burger-title {
+        .item-title {
             font-weight: bold;
             font-size: 18px;
             color: #333;
         }
 
-        .burger-description {
+        .item-description {
             font-size: 14px;
             color: #666;
             margin-top: 5px;
         }
 
-        .burger-quantity {
+        .item-quantity {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -128,111 +127,195 @@
             margin-bottom: 15px;
         }
 
-        .form-section .input-group label {
-            display: inline-block;
+        .order-summary {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffccbc;
+            border-radius: 8px;
+        }
+
+        .order-summary h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #d84315;
+        }
+
+        .order-summary table {
             width: 100%;
-            margin-bottom: 5px;
+            border-collapse: collapse;
+        }
+
+        .order-summary th, .order-summary td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            color: #444;
+        }
+
+        .order-summary th {
+            background-color: #ff5722;
+            color: white;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Caseirão Burger - Faça seu Pedido</h1>
+        <h1>Caseirão Burger - Pedido Online</h1>
         
         <form id="pedidoForm">
             <div class="form-section">
                 <h2>Escolha seus Hambúrgueres</h2>
-                <!-- Hambúrgueres no menu -->
-                <div class="burger">
+                
+                <!-- Hambúrgueres disponíveis -->
+                <div class="item">
                     <div>
-                        <div class="burger-title">Sujinho - R$ 13</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
+                        <div class="item-title">Sujinho - R$ 13</div>
+                        <div class="item-description">Pão, carne, queijo, presunto, verduras, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="sujinho">Qtd</label>
                         <input type="number" id="sujinho" name="sujinho" value="0" min="0" data-price="13">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Pé pra Fora - R$ 15</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, bacon, alface, molho da casa</div>
+                        <div class="item-title">Pé pra Fora - R$ 15</div>
+                        <div class="item-description">Pão, carne, queijo, bacon, verduras, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="pePraFora">Qtd</label>
                         <input type="number" id="pePraFora" name="pePraFora" value="0" min="0" data-price="15">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Pobr's - R$ 17</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, verduras, molho da casa</div>
+                        <div class="item-title">Pobres - R$ 17</div>
+                        <div class="item-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon,molho da casa e Verduras</div>
                     </div>
-                    <div class="burger-quantity">
-                        <label for="pobrs">Qtd</label>
-                        <input type="number" id="pobrs" name="pobrs" value="0" min="0" data-price="17">
+                    <div class="item-quantity">
+                        <label for="pobres">Qtd</label>
+                        <input type="number" id="pobres" name="pobres" value="0" min="0" data-price="17">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Demorô - R$ 20</div>
-                        <div class="burger-description">Pão, carne, frango desfiado, queijo, cheddar, bacon, ovo, verduras, molho da casa</div>
+                        <div class="item-title">Demorô - R$ 20</div>
+                        <div class="item-description">Pão, carne, queijo, cheddar, ovo, frango desfiado, bacon, verduras, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="demoro">Qtd</label>
                         <input type="number" id="demoro" name="demoro" value="0" min="0" data-price="20">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Molecão - R$ 23</div>
-                        <div class="burger-description">Pão, carne, calabresa, cebola caramelizada, queijo, presunto, bacon, verduras, molho da casa</div>
+                        <div class="item-title">Mulekão - R$ 23</div>
+                        <div class="item-description">Pão, carne, queijo, presunto, cebola caramelizada, bacon, calabresa, verduras, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
-                        <label for="molecao">Qtd</label>
-                        <input type="number" id="molecao" name="molecao" value="0" min="0" data-price="23">
+                    <div class="item-quantity">
+                        <label for="mulekao">Qtd</label>
+                        <input type="number" id="mulekao" name="mulekao" value="0" min="0" data-price="23">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Caseirão - R$ 25</div>
-                        <div class="burger-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
+                        <div class="item-title">Caseirão - R$ 25</div>
+                        <div class="item-description">Pão, carne, queijo, presunto, ovo, bacon, calabresa, batata palha, verduras, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="caseirao">Qtd</label>
                         <input type="number" id="caseirao" name="caseirao" value="0" min="0" data-price="25">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Podrão - R$ 30</div>
-                        <div class="burger-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
+                        <div class="item-title">Podrão - R$ 30</div>
+                        <div class="item-description">Pão, 2 carnes, queijo, presunto, ovo, bacon, calabresa, verduras, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="podrao">Qtd</label>
                         <input type="number" id="podrao" name="podrao" value="0" min="0" data-price="30">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Mata Fome - R$ 40</div>
-                        <div class="burger-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
+                        <div class="item-title">Mata Fome - R$ 40</div>
+                        <div class="item-description">Pão, 3 carnes, bacon, ovo, queijo, presunto, cheddar, molho da casa</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="mataFome">Qtd</label>
                         <input type="number" id="mataFome" name="mataFome" value="0" min="0" data-price="40">
                     </div>
                 </div>
-                <div class="burger">
+
+                <div class="item">
                     <div>
-                        <div class="burger-title">Major - R$ 23</div>
-                        <div class="burger-description">Pão, carne, filé de frango, molho barbecue, calabresa, molho da casa, verduras</div>
+                        <div class="item-title">Major - R$ 23</div>
+                        <div class="item-description">Pão, carne, filé de frango, molho barbecue, calabresa, molho da casa, verduras</div>
                     </div>
-                    <div class="burger-quantity">
+                    <div class="item-quantity">
                         <label for="major">Qtd</label>
                         <input type="number" id="major" name="major" value="0" min="0" data-price="23">
                     </div>
                 </div>
+
+                <h2>Escolha seus Refrigerantes</h2>
+
+                <div class="item">
+                    <div>
+                        <div class="item-title">Refrigerante Lata - R$ 5</div>
+                        <div class="item-description">Lata de refrigerante</div>
+                    </div>
+                    <div class="item-quantity">
+                        <label for="refrigeranteLata">Qtd</label>
+                        <input type="number" id="refrigeranteLata" name="refrigeranteLata" value="0" min="0" data-price="5">
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>
+                        <div class="item-title">Refrigerante 1 Litro - R$ 7</div>
+                        <div class="item-description">Garrafa de 1 litro de refrigerante</div>
+                    </div>
+                    <div class="item-quantity">
+                        <label for="refrigeranteLitro">Qtd</label>
+                        <input type="number" id="refrigeranteLitro" name="refrigeranteLitro" value="0" min="0" data-price="7">
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h2>Resumo do Pedido</h2>
+                <table id="resumoPedido">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantidade</th>
+                            <th>Preço Unitário</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4">Nenhum item selecionado</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="form-section">
@@ -290,17 +373,41 @@
 
             <button type="button" onclick="gerarPedido()">Enviar Pedido</button>
         </form>
+
+        <div class="footer">
+            &copy; 2024 Caseirão Burger. Todos os direitos reservados.
+        </div>
     </div>
 
     <script>
         // Função para calcular o valor total, incluindo taxa de entrega
         function calcularTotal() {
             let total = 0;
+            let resumo = '';
+            let resumoPedido = document.querySelector('#resumoPedido tbody');
+            resumoPedido.innerHTML = ''; // Limpa o resumo atual
+            
             document.querySelectorAll('input[type="number"]').forEach(function(input) {
                 const quantidade = parseInt(input.value);
                 const preco = parseFloat(input.getAttribute('data-price'));
-                total += quantidade * preco;
+                if (quantidade > 0) {
+                    total += quantidade * preco;
+                    const nome = input.closest('.item').querySelector('.item-title').textContent;
+                    resumo += `<tr>
+                                    <td>${nome}</td>
+                                    <td>${quantidade}</td>
+                                    <td>R$ ${preco.toFixed(2)}</td>
+                                    <td>R$ ${(quantidade * preco).toFixed(2)}</td>
+                               </tr>`;
+                }
             });
+
+            if (resumo === '') {
+                resumo = '<tr><td colspan="4">Nenhum item selecionado</td></tr>';
+            }
+
+            resumoPedido.innerHTML = resumo;
+
             const entrega = document.getElementById('entrega').value;
             if (entrega === 'entrega') {
                 total += 5; // Taxa de entrega de R$ 5,00
@@ -308,7 +415,7 @@
             document.getElementById('total').innerText = total.toFixed(2);
         }
 
-        // Adiciona o evento de mudança em todos os inputs para recalcular o total
+        // Adiciona o evento de mudança em todos os inputs para recalcular o total e atualizar o resumo
         document.querySelectorAll('input[type="number"]').forEach(function(input) {
             input.addEventListener('input', calcularTotal);
         });
@@ -327,16 +434,16 @@
             let mensagem = `*Pedido Caseirão Burger*\n--------------------------------------------\n`;
             mensagem += `*Nome:* ${nomeCliente}\n`;
 
-            document.querySelectorAll('.burger').forEach(function(burger, index) {
-                const quantidade = parseInt(burger.querySelector('input[type="number"]').value);
+            document.querySelectorAll('.item').forEach(function(item, index) {
+                const quantidade = parseInt(item.querySelector('input[type="number"]').value);
                 if (quantidade > 0) {
-                    const nome = burger.querySelector('.burger-title').textContent;
-                    const preco = burger.querySelector('input[type="number"]').getAttribute('data-price');
-                    const descricao = burger.querySelector('.burger-description').textContent;
+                    const nome = item.querySelector('.item-title').textContent;
+                    const preco = item.querySelector('input[type="number"]').getAttribute('data-price');
+                    const descricao = item.querySelector('.item-description').textContent;
 
-                    mensagem += `*Hambúrguer ${index + 1}:* ${nome} - R$ ${preco}\n`;
+                    mensagem += `*Item ${index + 1}:* ${nome} - R$ ${preco}\n`;
                     mensagem += `*Quantidade:* ${quantidade}\n`;
-                    mensagem += `*Ingredientes:* ${descricao}\n`;
+                    mensagem += `*Descrição:* ${descricao}\n`;
                     mensagem += `*Observações:* ${observacoes}\n--------------------------------------------\n`;
                 }
             });
@@ -353,4 +460,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
