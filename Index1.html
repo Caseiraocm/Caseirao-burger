@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido - O Caseirão</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:15px;font-family:Arial;background:#111;color:#fff}
+h1{text-align:center;color:#ffcc00}
+h2{margin-top:25px;color:#ffcc00;border-bottom:1px solid #333}
+form{max-width:680px;margin:auto;background:#1b1b1b;padding:20px;border-radius:12px}
+label{margin-top:15px;display:block;font-weight:bold}
+input,select,textarea{width:100%;padding:10px;border-radius:8px;border:none}
+textarea{resize:none}
+
+.lista{display:grid;gap:12px;margin-top:10px}
+.card{background:#222;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center}
+.info{max-width:68%}
+.info strong{color:#ffcc00;font-size:16px}
+.preco{font-size:14px;color:#ccc}
+.desc{font-size:13px;color:#aaa;margin-top:4px;line-height:1.3}
+
+.controle{display:flex;align-items:center;gap:8px}
+.controle button{
+  width:32px;height:32px;border:none;border-radius:6px;
+  background:#ffcc00;color:#000;font-size:18px;font-weight:bold;cursor:pointer
+}
+.controle span{width:22px;text-align:center;font-size:16px}
+
+.total{margin-top:20px;font-size:22px;text-align:center;color:#25d366;font-weight:bold}
+button.enviar{margin-top:20px;width:100%;padding:15px;background:#25d366;color:#fff;font-size:18px;border:none;border-radius:10px;cursor:pointer}
+
+.entrega-box,.troco-box{display:none}
+.taxa{font-size:14px;color:#ccc;text-align:center;margin-top:5px}
+</style>
+</head>
+
+<body>
+
+<h1>🍔 Pedido - O Caseirão</h1>
+
+<form>
+
+<label>Nome do cliente</label>
+<input id="nome" required>
+
+<!-- FUNÇÃO CARD -->
+<script>
+function card(nome,preco,desc=""){
+return `
+<div class="card">
+  <div class="info">
+    <strong>${nome}</strong>
+    <span class="preco">R$ ${preco.toFixed(2)}</span>
+    ${desc?`<span class="desc">${desc}</span>`:""}
+  </div>
+  <div class="controle" data-preco="${preco}">
+    <button type="button" onclick="menos(this)">−</button>
+    <span>0</span>
+    <button type="button" onclick="mais(this)">+</button>
+  </div>
+</div>`;
+}
+</script>
+
+<!-- LANCHES -->
+<h2>🍔 Lanches</h2>
+<div class="lista" id="lanches"></div>
+
+<!-- COMBOS -->
+<h2>🍟 Combos</h2>
+<div class="lista" id="combos"></div>
+
+<!-- REFRI -->
+<h2>🥤 Refrigerantes</h2>
+<div class="lista" id="refris"></div>
+
+<!-- SUCOS -->
+<h2>🧃 Sucos</h2>
+<div class="lista" id="sucos"></div>
+
+<!-- BATATAS -->
+<h2>🍟 Batatas</h2>
+<div class="lista" id="batatas"></div>
+
+<label>Entrega ou Retirada</label>
+<select id="tipoEntrega" onchange="verEntrega()">
+<option value="retirada">Retirada</option>
+<option value="entrega">Entrega</option>
+</select>
+
+<div class="entrega-box" id="entregaBox">
+<label>Endereço</label>
+<input id="endereco" placeholder="Rua, número, bairro">
+<div class="taxa">Taxa de entrega: R$ 5,00 (dentro da cidade)</div>
+</div>
+
+<div class="total">Total: R$ <span id="total">0,00</span></div>
+
+<label>Forma de pagamento</label>
+<select id="pagamento">
+<option>Pix</option>
+<option>Dinheiro</option>
+<option>Cartão</option>
+</select>
+
+<label>Precisa de troco?</label>
+<select id="troco" onchange="trocoBox.style.display=this.value=='sim'?'block':'none'">
+<option value="nao">Não</option>
+<option value="sim">Sim</option>
+</select>
+
+<div class="troco-box" id="trocoBox">
+<label>Troco para quanto?</label>
+<input id="valorTroco">
+</div>
+
+<label>Observações</label>
+<textarea id="obs"></textarea>
+
+<button type="button" class="enviar" onclick="enviar()">📲 Enviar Pedido</button>
+
+</form>
+
+<script>
+const dados={
+lanches:[
+["Sujinho",14,"Pão, carne, queijo, presunto e verduras."],
+["Pé pra Fora",16,"Pão, carne, queijo, presunto, bacon e verduras."],
+["Pobres",18,"Pão, carne, queijo, cheddar, bacon, cebola caramelizada e verduras."],
+["Demorô",22,"Pão, carne, queijo, cheddar, frango, bacon, ovo e verduras."],
+["Brutinho",20,"Pão, carne, queijo, cheddar, molho picante, anel de cebola e verduras."],
+["Molecão",24,"Pão, carne, queijo, presunto, calabresa, bacon, cebola caramelizada e verduras."],
+["Caseirão",27,"Pão, carne, queijo, presunto, batata palha, ovo, bacon, calabresa e verduras."],
+["Podrão",30,"Pão, 2 carnes, queijo, presunto, calabresa, frango, bacon, ovo e verduras."],
+["Mata Fome",40,"Pão, 3 carnes, tudo duplo."]
+],
+combos:[
+["Combo Pé",26],["Combo Pobres",28],["Combo Demorô",32],
+["Combo Brutinho",30],["Combo Molecão",34],
+["Combo Caseirão",37],["Combo Podrão",40],["Combo Mata Fome",50]
+],
+refris:[
+["Coca lata",6],["Coca lata zero",6],["Guaraná lata",5],
+["Fanta laranja",5],["Fanta uva",5],
+["Guaraná 1L",10],["Pepsi 1L",10],["Coca retornável",10]
+],
+sucos:[["Maracujá",7],["Goiaba",6],["Acerola",6]],
+batatas:[
+["Batata P simples",12],["Batata G simples",23],
+["Batata P recheada",17],["Batata G recheada",27]
+]
+};
+
+for(let k in dados){
+dados[k].forEach(i=>{
+document.getElementById(k).innerHTML+=card(i[0],i[1],i[2]);
+});
+}
+
+function mais(b){let s=b.parentElement.querySelector('span');s.innerText=+s.innerText+1;calc()}
+function menos(b){let s=b.parentElement.querySelector('span');if(+s.innerText>0){s.innerText--;calc()}}
+
+function verEntrega(){entregaBox.style.display=tipoEntrega.value==='entrega'?'block':'none';calc()}
+
+function calc(){
+let t=0;
+document.querySelectorAll('.controle').forEach(c=>{
+t+=+c.querySelector('span').innerText * c.dataset.preco;
+});
+if(tipoEntrega.value==='entrega') t+=5;
+total.innerText=t.toLocaleString('pt-BR',{minimumFractionDigits:2});
+}
+
+function enviar(){
+let msg=`🍔 *Pedido - O Caseirão*\n\n👤 ${nome.value}\n\n🧾 Itens:\n`;
+document.querySelectorAll('.card').forEach(c=>{
+let q=+c.querySelector('.controle span').innerText;
+if(q>0) msg+=`• ${c.querySelector('strong').innerText} x${q}\n`;
+});
+msg+=`\n💰 Total: R$ ${total.innerText}`;
+msg+=`\n💳 ${pagamento.value}`;
+if(tipoEntrega.value==='entrega') msg+=`\n🚚 Entrega (+R$5)\n📍 ${endereco.value}`;
+if(troco.value==='sim') msg+=`\n💵 Troco para: R$ ${valorTroco.value}`;
+msg+=`\n📝 ${obs.value}`;
+window.open(`https://wa.me/5586995653888?text=${encodeURIComponent(msg)}`,'_blank');
+}
+</script>
+
+</body>
+</html>
